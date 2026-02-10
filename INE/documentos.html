@@ -70,11 +70,13 @@
 
         /* 3. MIGAJAS DE PAN (CORREGIDAS) */
         .breadcrumb-container { 
-            padding: 0 60px;
-	    align-self: flex-start;
-    	    margin-top: 30px;    /* Separación de 20px con header */
-            margin-bottom: 30px; /* Separación de 20px con título */
-        }
+
+    width: 100%;
+    align-self: stretch;     /* ocupa el mismo ancho que el título */
+    margin-top: 30px;        /* separación con el header */
+    margin-bottom: 12px;     /* más pegado al título */
+}
+
 
         .breadcrumbs { 
             font-family: 'Roboto', sans-serif; 
@@ -176,14 +178,14 @@
 /* 8. Botones de Navegación */
 
 .nav-buttons-container {
+
     width: 100%;
-    max-width: 1200px;
     display: flex;
-    justify-content: space-between;
-    /* Aumentamos el margen superior e inferior para dar más aire */
-    margin: 20px 0 40px 0; 
-    padding: 0 10px;
+    justify-content: flex-start; /* flecha alineada a la izquierda */
+    margin: 16px 0 32px 0;       /* respirito entre línea y flecha */
+    padding: 0;                  /* el padding ya lo pone .main-content */
 }
+
 
 
 .nav-btn {
