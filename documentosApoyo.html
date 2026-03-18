@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos Apoyo - Corregido</title>
+
+    <!--
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="css/documentosApoyo.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+
+
+
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-logo">
+            <a href="index.html" class="logo-link">
+                <span class="brand">INFOMEX</span>
+                <span class="separator">|</span>
+                <span class="tagline">Sistema de acceso<br>a la información</span>
+            </a>
+        </div>
+        <nav class="header-nav">
+            <a href="guias.html">Guías del sistema</a>
+            <a href="tutorial.html">Tutorial para<br>versiones públicas</a>
+            <a href="glosario.html">Glosario</a>
+        </nav>
+    </header>
+
+    <!-- Migas con el mismo marco -->
+    <div class="breadcrumb-container">
+        <nav class="breadcrumbs-nav">
+            <a href="index.html">Inicio</a> <span>/</span> <b>Documentos del Apoyo</b>
+        </nav>
+    </div>
+
+    <!-- Botón “Anterior” alineado -->
+    <div class="nav-buttons-container">
+        <a href="index.html" class="nav-btn">
+            <i class="far fa-arrow-alt-circle-left"></i> Anterior
+        </a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <div class="content-grid">
+            <div class="column">
+                <div class="menu-item">
+                    <div class="main-button">Atención de solicitudes de acceso a la información</div>
+                    <div class="dropdown-level-1">
+                        <button class="submenu-trigger">Fichas Técnicas</button>
+                        <div class="dropdown-level-2">
+                            <a href="documentosApoyo2.html?tema=1">Información Pública</a>
+                            <a href="documentosApoyo2.html?tema=2">Incompetencia</a>
+                            <a href="documentosApoyo2.html?tema=3">Confidencialidad</a>
+                            <a href="documentosApoyo2.html?tema=4">Confidencialidad - Anexo 1</a>
+                            <a href="documentosApoyo2.html?tema=5">Confidencialidad - Anexo 2</a>
+                            <a href="documentosApoyo2.html?tema=6">Reserva</a>
+                            <a href="documentosApoyo2.html?tema=7">Reserva - Anexo único</a>
+                            <a href="documentosApoyo2.html?tema=8">Declaración de inexistencia</a>
+                            <a href="documentosApoyo2.html?tema=9">Sugerencia Turno</a>
+                            <a href="documentosApoyo2.html?tema=10">Sugerencia Turno - Anexo único</a>
+                        </div>
+
+                        <button class="submenu-trigger">Formatos Tipo</button>
+                        <div class="dropdown-level-2">
+                            <a href="documentosApoyo2.html?tema=11">Información Pública</a>
+                            <a href="documentosApoyo2.html?tema=12">Incompetencia</a>
+                            <a href="documentosApoyo2.html?tema=13">Inexistencia</a>
+                            <a href="documentosApoyo2.html?tema=14">Confidencialidad</a>
+                            <a href="documentosApoyo2.html?tema=15">Reserva</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="menu-item">
+                    <div class="main-button">Atención de solicitudes para el ejercicio de derechos ARCOP</div>
+                    <div class="dropdown-level-1">
+                        <button class="submenu-trigger">Fichas Técnicas</button>
+                        <div class="dropdown-level-2">
+                            <a href="documentosApoyo2.html?tema=16">Plazos internos</a>
+                            <a href="documentosApoyo2.html?tema=17">Esquema básico de respuestas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /content-grid -->
+    </div><!-- /container -->
+
+
+
+<!-- ======================================================
+     PANEL DE ACCESIBILIDAD
+====================================================== -->
+<div class="acc-wrapper">
+
+    <!-- Botón lateral -->
+    <div id="accBtn" class="acc-button">
+        <i class="fa-solid fa-universal-access"></i>
+    </div>
+
+    <!-- Panel deslizante -->
+    <div id="accPanel" class="acc-panel">
+        
+        <div class="acc-header">
+            <i class="fa-solid fa-universal-access"></i>
+            <span>Accesibilidad</span>
+        </div>
+
+        <div class="acc-content">
+
+            <div class="font-size-row">
+                <button id="fontSmall" class="fs-btn">a -</button>
+
+                <input type="range" min="12" max="30" value="16" id="fontRange">
+
+                <button id="fontBig" class="fs-btn">A+</button>
+            </div>
+
+            <div class="darkmode-row">
+                <span>Modo nocturno</span>
+
+                <label class="switch">
+                    <input type="checkbox" id="darkToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- ====================================================== -->
+
+
+
+
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="images/INE.png" alt="INE Logo" class="footer-logo">
+            <span class="footer-text">© INE México 2026</span>
+        </div>
+    </footer>
+
+    <script>
+        // ---- NIVEL 1: .main-button abre/cierra .dropdown-level-1 (clic + teclado) ----
+        document.querySelectorAll('.menu-item').forEach(function (item) {
+            var mainBtn = item.querySelector('.main-button');
+            if (!mainBtn) return;
+
+            // Hacer el div enfocable con teclado
+            mainBtn.setAttribute('tabindex', '0');
+            mainBtn.setAttribute('role', 'button');
+            mainBtn.style.cursor = 'pointer';
+
+            function toggleLevel1(e) {
+                e.stopPropagation();
+                var isOpen = item.classList.contains('is-open');
+
+                // Cerrar todos los demás ítems abiertos
+                document.querySelectorAll('.menu-item.is-open').forEach(function (other) {
+                    if (other !== item) {
+                        other.classList.remove('is-open');
+                        // Cerrar también los sub-menús de nivel 2 dentro del que se cierra
+                        other.querySelectorAll('.dropdown-level-2.active').forEach(function (d2) {
+                            d2.classList.remove('active');
+                        });
+                        other.querySelectorAll('.submenu-trigger.active').forEach(function (t) {
+                            t.classList.remove('active');
+                        });
+                    }
+                });
+
+                // Alternar el actual
+                if (isOpen) {
+                    item.classList.remove('is-open');
+                } else {
+                    item.classList.add('is-open');
+                }
+            }
+
+            mainBtn.addEventListener('click', toggleLevel1);
+
+            mainBtn.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleLevel1(e);
+                }
+                if (e.key === 'Escape') {
+                    item.classList.remove('is-open');
+                    mainBtn.focus();
+                }
+            });
+        });
+
+        // ---- NIVEL 2: .submenu-trigger abre/cierra .dropdown-level-2 (clic + teclado) ----
+        document.querySelectorAll('.submenu-trigger').forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var targetMenu = button.nextElementSibling;
+                button.classList.toggle('active');
+                targetMenu.classList.toggle('active');
+            });
+
+            button.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    var targetMenu = button.nextElementSibling;
+                    button.classList.remove('active');
+                    targetMenu.classList.remove('active');
+                    button.focus();
+                }
+            });
+        });
+
+        // Cerrar nivel 1 al hacer clic fuera
+        document.addEventListener('click', function () {
+            document.querySelectorAll('.menu-item.is-open').forEach(function (item) {
+                item.classList.remove('is-open');
+            });
+        });
+    </script>
+
+
+
+
+
+<script>
+// ----- ABRIR/CERRAR PANEL -----
+const accBtn = document.getElementById("accBtn");
+const accPanel = document.getElementById("accPanel");
+accBtn.onclick = () => accPanel.classList.toggle("open");
+
+// ----- TAMAÑO DE FUENTE -----
+const range = document.getElementById("fontRange");
+const small = document.getElementById("fontSmall");
+const big = document.getElementById("fontBig");
+
+function applyFont() {
+    document.documentElement.style.fontSize = range.value + "px";
+}
+range.oninput = applyFont;
+small.onclick = () => {
+    range.value = Math.max(12, parseInt(range.value) - 2);
+    applyFont();
+};
+big.onclick = () => {
+    range.value = Math.min(30, parseInt(range.value) + 2);
+    applyFont();
+};
+
+// ----- MODO NOCTURNO -----
+const darkToggle = document.getElementById("darkToggle");
+
+// Restaurar preferencia
+if (localStorage.getItem("darkmode") === "1") {
+    document.body.classList.add("dark-mode");
+    darkToggle.checked = true;
+}
+
+// Cambiar preferencia
+darkToggle.onchange = () => {
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkmode", "1");
+    } else {
+        localStorage.removeItem("darkmode");
+    }
+};
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>
