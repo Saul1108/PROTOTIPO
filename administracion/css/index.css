@@ -2,6 +2,10 @@
         :root {
             --primary-bg: #efebf4;
             --accent-blue: #34a8f3;
+              /* --- VARIABLES & RESET --- */
+        :root {
+            --primary-bg: #efebf4;
+            --accent-blue: #34a8f3;
             --accent-morado: #cbbed4;
             --text-dark: #333333;
             --text-light: #666666;
@@ -62,10 +66,10 @@
 
         .header-left .sub-txt {
             font-size: 0.9rem;
-            border-left: 2px solid #333;
+            border-left: 2px solid #000000;
             padding-left: 1rem;
             line-height: 1.2;
-            color: var(--text-light);
+            color: #000000;
             font-weight: 400;
         }
 
@@ -315,8 +319,8 @@
             position: absolute;
             right: -260px;
             top: 0;
-            transition: right 0.3s ease;
             box-shadow: -4px 4px 20px rgba(0,0,0,0.3);
+            transition: right 0.3s ease;
         }
 
         .acc-panel.open {
@@ -357,10 +361,17 @@
             background: #e6e6e6;
         }
 
+        .darkmode-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 14px;
+        }
+
         /* --- SWITCH (modo nocturno) --- */
         .switch {
             position: relative;
-            display: inline-block;
+            display: inline-block !important;
             width: 42px;
             height: 22px;
         }
@@ -370,7 +381,7 @@
         .slider {
             position: absolute;
             inset: 0;
-            background: #ccc;
+            background: #bbb;
             border-radius: 22px;
             transition: .3s;
         }
@@ -401,7 +412,6 @@
 
         body.dark-mode {
             background: #1d1d1d !important;
-            color: white !important;
         }
 
         /* Header y contenido dentro de él */
@@ -433,9 +443,7 @@
 
         /* Botones del panel */
         body.dark-mode .fs-btn,
-        body.dark-mode .acc-button,
-        body.dark-mode .acc-panel,
-        body.dark-mode .acc-panel * {
+        body.dark-mode .acc-button * {
             color: white !important;
         }
 
@@ -471,5 +479,9 @@
         body.dark-mode .cards-grid a h3,
         body.dark-mode .cards-grid a * {
             color: white !important;
+        }
+
+        body.dark-mode .darkmode-row span {
+            color: #000 !important;
         }
 
