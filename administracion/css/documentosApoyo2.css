@@ -1,4 +1,4 @@
-        /* 1. Reset Global */
+       /* 1. Reset Global */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -485,4 +485,8 @@ body.dark-mode footer,
 body.dark-mode footer * {
     background: #111 !important;
     color: white !important;
+}
+
+body.dark-mode .darkmode-row span {
+    color: #000 !important;
 }
