@@ -381,10 +381,17 @@
     background: #e6e6e6;
 }
 
+.darkmode-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+}
+
 /* SWITCH */
 .switch {
     position: relative;
-    display: inline-block;
+    display: inline-block !important;
     width: 42px;
     height: 22px;
 }
@@ -497,4 +504,8 @@ body.dark-mode .fs-btn {
 
 body.dark-mode .acc-button {
     background:#444 !important;
+}
+
+body.dark-mode .darkmode-row span {
+    color: #000 !important;
 }
