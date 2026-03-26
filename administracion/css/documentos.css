@@ -1,4 +1,4 @@
-        /* 1. Reset Global */
+             /* 1. Reset Global */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -687,6 +687,10 @@ body.dark-mode .fs-btn {
 
 body.dark-mode .acc-button {
     background: #444 !important;
+}
+
+body.dark-mode .darkmode-row span {
+    color: #000 !important;
 }
 
 /* Footer */
