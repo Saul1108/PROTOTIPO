@@ -1,4 +1,4 @@
-        * {
+                * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -568,10 +568,17 @@
     background: #e6e6e6;
 }
 
+.darkmode-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+}
+
 /* SWITCH */
 .switch {
     position: relative;
-    display: inline-block;
+    display: inline-block !important;
     width: 42px;
     height: 22px;
 }
@@ -604,7 +611,6 @@ input:checked + .slider:before { transform: translateX(20px); }
 
 body.dark-mode {
     background: #1a1a1a !important;
-    color: white !important;
 }
 
 /* HEADER */
@@ -700,7 +706,6 @@ body.dark-mode .content-grid *,
 body.dark-mode .column *,
 body.dark-mode .menu-item *,
 body.dark-mode p,
-body.dark-mode span,
 body.dark-mode li {
     color: white !important;
 }
@@ -710,9 +715,9 @@ body.dark-mode li {
    PANEL DE ACCESIBILIDAD EN MODO OSCURO
 ============================================================ */
 
-body.dark-mode .acc-panel,
+
 body.dark-mode .acc-panel * {
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
 }
 
 body.dark-mode .acc-header {
@@ -747,6 +752,13 @@ body.dark-mode footer * {
 body.dark-mode #module-wrapper {
     background-color: #1a1a1a !important;
 }
+
+
+/* Forzar que el texto "Modo nocturno" SIEMPRE esté en negro */
+body.dark-mode .darkmode-row span {
+    color: #000000 !important;
+}
+
 
 /* evitamos que los temas sobrescriban el fondo */
 body.dark-mode #module-wrapper.theme-tab1,
