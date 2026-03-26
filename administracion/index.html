@@ -44,10 +44,6 @@
             <h1>INFOMEX-INE</h1>
             <div class="sub-txt">Sistema de acceso<br>a la información</div>
         </div>
-        <nav class="header-nav">
-            <a href="https://crmcau.ine.mx/" class="nav-link">CAU</a>
-            <a href="https://uttypdp-pruebas.ine.mx/infomex-ine/app/home?execution=e1s1" class="nav-link">IntraINE</a>
-        </nav>
     </header>
 
     <main class="hero-section">
@@ -166,8 +162,8 @@ big.onclick = () => {
 // ------------------------
 const darkToggle = document.getElementById("darkToggle");
 
-// Restaurar
-if (localStorage.getItem("darkmode") === "1") {
+// Restaurar o predeterminar activado
+if (localStorage.getItem("darkmode") !== "0") {
     document.body.classList.add("dark-mode");
     darkToggle.checked = true;
 }
@@ -178,7 +174,7 @@ darkToggle.onchange = () => {
     if (document.body.classList.contains("dark-mode")) {
         localStorage.setItem("darkmode", "1");
     } else {
-        localStorage.removeItem("darkmode");
+        localStorage.setItem("darkmode", "0");
     }
 };
 </script>
