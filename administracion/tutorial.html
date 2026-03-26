@@ -142,7 +142,8 @@ big.onclick   = () => { range.value = Math.min(30, parseInt(range.value)+2); app
 // Modo nocturno
 const darkToggle = document.getElementById("darkToggle");
 
-if (localStorage.getItem("darkmode") === "1") {
+// Cargar preferencia o encender por defecto
+if (localStorage.getItem("darkmode") !== "0") {
     document.body.classList.add("dark-mode");
     darkToggle.checked = true;
 }
@@ -153,7 +154,7 @@ darkToggle.onchange = () => {
     if (document.body.classList.contains("dark-mode")) {
         localStorage.setItem("darkmode","1");
     } else {
-        localStorage.removeItem("darkmode");
+        localStorage.setItem("darkmode","0");
     }
 };
 </script>
