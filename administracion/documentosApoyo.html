@@ -260,8 +260,8 @@ big.onclick = () => {
 // ----- MODO NOCTURNO -----
 const darkToggle = document.getElementById("darkToggle");
 
-// Restaurar preferencia
-if (localStorage.getItem("darkmode") === "1") {
+// Restaurar preferencia o encender por defecto
+if (localStorage.getItem("darkmode") !== "0") {
     document.body.classList.add("dark-mode");
     darkToggle.checked = true;
 }
@@ -273,7 +273,7 @@ darkToggle.onchange = () => {
     if (document.body.classList.contains("dark-mode")) {
         localStorage.setItem("darkmode", "1");
     } else {
-        localStorage.removeItem("darkmode");
+        localStorage.setItem("darkmode", "0");
     }
 };
 </script>
