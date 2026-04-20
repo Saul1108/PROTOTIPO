@@ -312,11 +312,14 @@
         </div>
 
 
-        <nav class="header-nav">
+        <nav class="header-nav" id="headerNav">
             <a href="guias.html">Guías del sistema</a>
             <a href="tutorial.html">Tutorial para<br>versiones públicas</a>
             <a href="glosario.html">Glosario</a>
         </nav>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="headerNav">
+            <i class="fas fa-bars"></i>
+        </button>
     </header>
 
     <main class="main-content">
@@ -625,6 +628,17 @@
 const accBtn = document.getElementById("accBtn");
 const accPanel = document.getElementById("accPanel");
 accBtn.onclick = () => accPanel.classList.toggle("open");
+
+// ------ MENÚ HAMBURGUESA ------
+const mobileBtn = document.getElementById('mobileMenuBtn');
+const headerNav = document.getElementById('headerNav');
+if (mobileBtn && headerNav) {
+    mobileBtn.addEventListener('click', function() {
+        headerNav.classList.toggle('active');
+        const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+        mobileBtn.setAttribute('aria-expanded', !isExpanded);
+    });
+}
 
 // ------ TAMAÑO DE LETRA ------
 const range = document.getElementById("fontRange");
