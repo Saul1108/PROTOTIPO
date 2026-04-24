@@ -15,287 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/all.min.css">
 
 
-<!--
-    <style>
-        /* 1. Reset Global */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #efebf4;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* --- HEADER --- */
-        .main-header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e0e0e0;
-            padding: 15px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .header-logo .brand {
-            font-size: 2.2em;
-            font-weight: 900;
-            letter-spacing: -1px;
-        }
-
-        .header-logo .separator {
-            font-size: 2.5em;
-            font-weight: 300;
-            margin: 0 15px;
-        }
-
-        .header-logo .tagline {
-            font-size: 0.9em;
-            line-height: 1.2;
-        }
-
-        .header-nav {
-            display: flex;
-            gap: 40px;
-        }
-
-        .header-nav a {
-            text-decoration: none;
-            color: #333;
-            font-size: 0.95em;
-            position: relative;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        .header-nav a::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background-color: #34a8f3;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .header-nav a:hover::after {
-            transform: scaleX(1);
-        }
-
-        /* --- CONTENIDO PRINCIPAL --- */
-        .container {
-            flex: 1;
-            max-width: 1100px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 40px 60px;
-        }
-
-        /* --- BREADCRUMBS --- */
-        .breadcrumb-container {
-            width: 100%;
-            align-self: stretch;
-            margin-top: 30px;
-            margin-bottom: 12px;
-        }
-
-        .breadcrumbs-nav {
-            font-family: 'Roboto', sans-serif;
-            font-size: 15px;
-            color: #666;
-            display: flex;
-            justify-content: flex-start;
-            text-align: left;
-        }
-
-        .breadcrumbs-nav a {
-            color: #000000;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .breadcrumbs-nav a:hover {
-            text-decoration: underline;
-        }
-
-        .breadcrumbs-nav span {
-            margin: 0 8px;
-            color: #999;
-        }
-
-        .breadcrumbs-nav b {
-            color: #000000;
-        }
-
-        /* 4. Contenido Principal */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 90px 90px;
-        }
-
-        .header-info {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #321b44;
-        }
-
-        .doc-title {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: #321b44;
-        }
-
-        /* 5. Descargas */
-        .download-area {
-            display: flex;
-            gap: 20px;
-        }
-
-        .download-link {
-            text-decoration: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #321b44;
-            font-weight: 700;
-            font-size: 0.9em;
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-            padding: 0;
-        }
-
-        .download-link:hover {
-            color: #8e44ad;
-        }
-
-        .download-link:disabled {
-            opacity: 0.5;
-            cursor: wait;
-        }
-
-
-
-
-        /* 6. Imagen */
-        .image-container {
-            width: 100%;
-            max-width: 1100px;
-            background: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-
-            /* ESTO ES LO IMPORTANTE PARA VERTICALIDAD */
-            display: flex;
-            flex-direction: column;
-            /* Alinea los hijos de arriba hacia abajo */
-            align-items: center;
-            /* Centra las imágenes horizontalmente */
-            gap: 30px;
-            /* Espacio de 30px entre cada imagen */
-        }
-
-        .image-container img {
-            max-width: 100%;
-            /* Evita que la imagen se salga del cuadro */
-            height: auto;
-            /* Mantiene la proporción */
-            border: 1px solid #eee;
-            /* Opcional: un borde sutil para cada foto */
-        }
-
-        /* 7. Footer */
-        .site-footer {
-            background-color: #000000;
-            color: white;
-            padding: 20px 60px;
-            width: 100%
-        }
-
-        .footer-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-
-        .logo-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            /* sin subrayado */
-            color: inherit;
-            /* mantiene el color original */
-            cursor: pointer;
-            /* icono de mano al pasar el mouse */
-        }
-
-        .logo-link:hover {
-            opacity: 0.85;
-            /* ligero efecto visual */
-        }
-
-
-
-
-        /* --- BOTÓN ANTERIOR ALINEADO CON MIGAJS DE PAN --- */
-        .nav-buttons-container {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            /* Anterior a la izq, Siguiente a la der */
-            align-items: center;
-            margin: 16px 0 32px 0;
-            padding: 0;
-            /* el padding lateral lo pone .main-content */
-        }
-
-        .nav-btn {
-            text-decoration: none;
-            color: #321b44;
-            font-size: 1.1em;
-            font-weight: 400;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
-        }
-
-        .nav-btn i {
-            font-size: 1.8em;
-        }
-
-        .nav-btn:hover {
-            color: #8e44ad;
-        }
-    </style>    -->
 </head>
 
 <body>
@@ -313,11 +33,13 @@
 
 
         <nav class="header-nav" id="headerNav">
-            <a href="guias.html">Guías del sistema</a>
-            <a href="tutorial.html">Tutorial para<br>versiones públicas</a>
+            <a href="guias.html">Guías de usuario</a>
+            <a href="tutorial.html">Tutorial de<br>versión pública</a>
+            <a href="documentosApoyo.html">Documentos<br>de apoyo</a>
             <a href="glosario.html">Glosario</a>
         </nav>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="headerNav">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false"
+            aria-controls="headerNav">
             <i class="fas fa-bars"></i>
         </button>
     </header>
@@ -368,42 +90,42 @@
     <!-- ======================================================
      PANEL DE ACCESIBILIDAD
 ====================================================== -->
-<div class="acc-wrapper">
+    <div class="acc-wrapper">
 
-    <!-- Botón lateral -->
-    <div id="accBtn" class="acc-button">
-        <i class="fa-solid fa-universal-access"></i>
-    </div>
-
-    <!-- Panel deslizante -->
-    <div id="accPanel" class="acc-panel">
-        
-        <div class="acc-header">
+        <!-- Botón lateral -->
+        <div id="accBtn" class="acc-button">
             <i class="fa-solid fa-universal-access"></i>
-            <span>Accesibilidad</span>
         </div>
 
-        <div class="acc-content">
+        <!-- Panel deslizante -->
+        <div id="accPanel" class="acc-panel">
 
-            <div class="font-size-row">
-                <button id="fontSmall" class="fs-btn">a -</button>
-                <input type="range" min="12" max="30" value="16" id="fontRange">
-                <button id="fontBig" class="fs-btn">A+</button>
+            <div class="acc-header">
+                <i class="fa-solid fa-universal-access"></i>
+                <span>Accesibilidad</span>
             </div>
 
-            <div class="darkmode-row">
-                <span>Modo nocturno</span>
+            <div class="acc-content">
 
-                <label class="switch">
-                    <input type="checkbox" id="darkToggle">
-                    <span class="slider"></span>
-                </label>
+                <div class="font-size-row">
+                    <button id="fontSmall" class="fs-btn">a -</button>
+                    <input type="range" min="12" max="30" value="16" id="fontRange">
+                    <button id="fontBig" class="fs-btn">A+</button>
+                </div>
+
+                <div class="darkmode-row">
+                    <span>Modo nocturno</span>
+
+                    <label class="switch">
+                        <input type="checkbox" id="darkToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
             </div>
-
         </div>
     </div>
-</div>
-<!-- ====================================================== -->
+    <!-- ====================================================== -->
 
 
 
@@ -445,6 +167,7 @@
                 const a = document.createElement('a');
                 const nombreTema = (document.getElementById('titulo-doc').innerText || 'archivo').replace(/[^a-z0-9]/gi, '_');
                 a.href = URL.createObjectURL(content);
+                a.target = '_blank';
                 a.download = nombreTema + '.zip';
                 a.click();
                 URL.revokeObjectURL(a.href);
@@ -504,6 +227,7 @@
                 const content = await zip.generateAsync({ type: 'blob' });
                 const a = document.createElement('a');
                 a.href = URL.createObjectURL(content);
+                a.target = '_blank';
                 a.download = 'Fichas_Tecnicas.zip';
                 a.click();
                 URL.revokeObjectURL(a.href);
@@ -623,69 +347,78 @@
     </script>
 
 
-<script>
-// ------ PANEL ------
-const accBtn = document.getElementById("accBtn");
-const accPanel = document.getElementById("accPanel");
-accBtn.onclick = () => accPanel.classList.toggle("open");
+    <script>
+        // ------ PANEL ------
+        const accBtn = document.getElementById("accBtn");
+        const accPanel = document.getElementById("accPanel");
+        accBtn.onclick = () => accPanel.classList.toggle("open");
 
-// ------ MENÚ HAMBURGUESA ------
-const mobileBtn = document.getElementById('mobileMenuBtn');
-const headerNav = document.getElementById('headerNav');
-if (mobileBtn && headerNav) {
-    mobileBtn.addEventListener('click', function() {
-        headerNav.classList.toggle('active');
-        const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
-        mobileBtn.setAttribute('aria-expanded', !isExpanded);
-    });
-}
+        // ------ MENÚ HAMBURGUESA ------
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const headerNav = document.getElementById('headerNav');
+        if (mobileBtn && headerNav) {
+            mobileBtn.addEventListener('click', function () {
+                headerNav.classList.toggle('active');
+                const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                mobileBtn.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
 
-// ------ TAMAÑO DE LETRA ------
-const range = document.getElementById("fontRange");
-const small = document.getElementById("fontSmall");
-const big = document.getElementById("fontBig");
+        // ------ TAMAÑO DE LETRA ------
+        const range = document.getElementById("fontRange");
+        const small = document.getElementById("fontSmall");
+        const big = document.getElementById("fontBig");
 
-function applyFont() {
-    document.documentElement.style.fontSize = range.value + "px";
-}
+        function applyFont() {
+            document.documentElement.style.fontSize = range.value + "px";
+        }
 
-range.oninput = applyFont;
-small.onclick = () => {
-    range.value = Math.max(12, parseInt(range.value) - 2);
-    applyFont();
-};
-big.onclick = () => {
-    range.value = Math.min(30, parseInt(range.value) + 2);
-    applyFont();
-};
+        range.oninput = applyFont;
+        small.onclick = () => {
+            range.value = Math.max(12, parseInt(range.value) - 2);
+            applyFont();
+        };
+        big.onclick = () => {
+            range.value = Math.min(30, parseInt(range.value) + 2);
+            applyFont();
+        };
 
-// ------ MODO NOCTURNO ------
-const darkToggle = document.getElementById("darkToggle");
+        // ------ MODO NOCTURNO ------
+        const darkToggle = document.getElementById("darkToggle");
 
-// Cargar preferencia guardada o encender por defecto
-if (localStorage.getItem("darkmode") !== "0") {
-    document.body.classList.add("dark-mode");
-    darkToggle.checked = true;
-}
+        // Cargar preferencia guardada o encender por defecto
+        if (localStorage.getItem("darkmode") !== "0") {
+            document.body.classList.add("dark-mode");
+            darkToggle.checked = true;
+        }
 
-// Guardar preferencia
-darkToggle.onchange = () => {
-    document.body.classList.toggle("dark-mode");
-    if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("darkmode","1");
-    } else {
-        localStorage.setItem("darkmode","0");
-    }
-};
-</script>
+        // Guardar preferencia
+        darkToggle.onchange = () => {
+            document.body.classList.toggle("dark-mode");
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("darkmode", "1");
+            } else {
+                localStorage.setItem("darkmode", "0");
+            }
+        };
+    </script>
 
+    <!-- Botón Volver Arriba -->
+    <button id="backToTopBtn" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-
-
-
-
-
-
+    <script>
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        if (backToTopBtn) {
+            window.addEventListener("scroll", () => {
+                backToTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+            });
+            backToTopBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+    </script>
 
 </body>
 
