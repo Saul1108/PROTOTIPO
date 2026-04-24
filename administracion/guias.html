@@ -28,11 +28,13 @@
             </a>
         </div>
         <nav class="header-nav" id="headerNav">
-            <a href="tutorial.html">Tutoriales de<br>versiones públicas</a>
-            <a href="documentosApoyo.html">Fichas técnicas y<br>formatos tipo</a>
+            <a href="guias.html">Guías de usuario</a>
+            <a href="tutorial.html">Tutorial de<br>versión pública</a>
+            <a href="documentosApoyo.html">Documentos<br>de apoyo</a>
             <a href="glosario.html">Glosario</a>
         </nav>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="headerNav">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false"
+            aria-controls="headerNav">
             <i class="fas fa-bars"></i>
         </button>
     </header>
@@ -42,7 +44,7 @@
             <nav class="breadcrumbs-nav">
                 <a href="index.html">Inicio</a>
                 <span>/</span>
-                <b>Guía de usuario</b>
+                <b>Guías de usuario</b>
             </nav>
         </div>
 
@@ -54,19 +56,21 @@
 
         <!-- Menú de Opciones -->
         <div class="options-nav" role="tablist" aria-label="Menú de Opciones">
-            <button class="option-btn active" onclick="showTab('tab1', this)"
-                style="border-bottom: 3px solid #321b44;" role="tab" aria-selected="true" aria-controls="tab1">Administrador</button>
-            <button class="option-btn" onclick="showTab('tab3', this)"
-                style="border-bottom: 3px solid #409aa1;" role="tab" aria-selected="false" aria-controls="tab3">UT-Gestión</button>
-            <button class="option-btn" onclick="showTab('tab4', this)" style="border-bottom: 3px solid #d5007f;" role="tab" aria-selected="false" aria-controls="tab4">Áreas
+            <button class="option-btn active" onclick="showTab('tab1', this)" style="border-bottom: 3px solid #321b44;"
+                role="tab" aria-selected="true" aria-controls="tab1">Administrador</button>
+            <button class="option-btn" onclick="showTab('tab3', this)" style="border-bottom: 3px solid #409aa1;"
+                role="tab" aria-selected="false" aria-controls="tab3">UT-Gestión</button>
+            <button class="option-btn" onclick="showTab('tab4', this)" style="border-bottom: 3px solid #d5007f;"
+                role="tab" aria-selected="false" aria-controls="tab4">Áreas
                 responsables</button>
-            <button class="option-btn" onclick="showTab('tab5', this)" style="border-bottom: 3px solid #c791a8;" role="tab" aria-selected="false" aria-controls="tab5">Comité
+            <button class="option-btn" onclick="showTab('tab5', this)" style="border-bottom: 3px solid #c791a8;"
+                role="tab" aria-selected="false" aria-controls="tab5">Comité
                 de
                 Transparencia</button>
-            <button class="option-btn" onclick="showTab('tab7', this)"
-                style="border-bottom: 3px solid #575453;" role="tab" aria-selected="false" aria-controls="tab7">INE-Revisor</button>
-            <button class="option-btn" onclick="showTab('tab8', this)"
-                style="border-bottom: 3px solid #0063b8;" role="tab" aria-selected="false" aria-controls="tab8">INE-Consulta</button>
+            <button class="option-btn" onclick="showTab('tab7', this)" style="border-bottom: 3px solid #575453;"
+                role="tab" aria-selected="false" aria-controls="tab7">INE-Revisor</button>
+            <button class="option-btn" onclick="showTab('tab8', this)" style="border-bottom: 3px solid #0063b8;"
+                role="tab" aria-selected="false" aria-controls="tab8">INE-Consulta</button>
         </div>
 
         <!-- PESTAÑAS (Se moverán los contenidos aquí) -->
@@ -196,7 +200,7 @@
                     var mobileBtn = document.getElementById('mobileMenuBtn');
                     var headerNav = document.getElementById('headerNav');
                     if (mobileBtn && headerNav) {
-                        mobileBtn.addEventListener('click', function() {
+                        mobileBtn.addEventListener('click', function () {
                             headerNav.classList.toggle('active');
                             var isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
                             mobileBtn.setAttribute('aria-expanded', !isExpanded);
@@ -950,6 +954,11 @@
         </div>
     </footer>
 
+    <!-- Botón Volver Arriba -->
+    <button id="backToTopBtn" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
 
 
 
@@ -991,6 +1000,21 @@
                 localStorage.setItem("darkmode", "0");
             }
         };
+
+        // Botón Volver Arriba
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        if (backToTopBtn) {
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.style.display = "flex";
+                } else {
+                    backToTopBtn.style.display = "none";
+                }
+            });
+            backToTopBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
     </script>
 
 
