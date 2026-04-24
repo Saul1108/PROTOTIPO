@@ -5,113 +5,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenida - INFOMEX-INE</title>
-
-    <!-- Fonts & Icons 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">   -->
+    <meta name="description"
+        content="Centro de ayuda de INFOMEX-INE. Accede a guías del sistema, documentos de apoyo, glosario y tutoriales.">
 
     <link rel="stylesheet" type="text/css" href="css/font.css">
     <link rel="stylesheet" type="text/css" href="css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-
-    <style>
-
-.hero-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            /* Background Image Logic */
-            background-image: url('images/fondoINE.png');
-            background-repeat: no-repeat;
-            background-position: top center;
-            background-size: 100% auto;
-            /* Responsive width, auto height */
-            padding-top: 4rem;
-            /* Space for content below fixed header / bg image top */
-        }
-
-        
-    </style>
-
 </head>
 
 <body>
 
     <header class="main-header">
-        <div class="header-left">
-            <h1>INFOMEX-INE</h1>
-            <div class="sub-txt">Sistema de acceso<br>a la información</div>
+        <div class="header-logo">
+            <a href="index.html" class="logo-link">
+                <span class="brand">INFOMEX</span>
+                <span class="separator">|</span>
+                <span class="tagline">Sistema de acceso<br>a la información</span>
+            </a>
         </div>
+
+        <nav class="header-nav" id="headerNav" aria-label="Navegación principal">
+            <a href="guias.html">Guías de usuario</a>
+            <a href="tutorial.html">Tutorial de<br>versión pública</a>
+            <a href="documentosApoyo.html">Documentos<br>de apoyo</a>
+            <a href="glosario.html">Glosario</a>
+        </nav>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false"
+            aria-controls="headerNav">
+            <i class="fas fa-bars"></i>
+        </button>
     </header>
 
     <main class="hero-section">
 
-        <!-- BOTÓN LATERAL Y PANEL DE ACCESIBILIDAD -->
-<div class="acc-wrapper">
-
-    <!-- Botón lateral (abre el panel) -->
-    <div id="accBtn" class="acc-button">
-        <i class="fa-solid fa-universal-access"></i>
-    </div>
-
-    <!-- Panel emergente deslizante -->
-    <div id="accPanel" class="acc-panel">
-
-        <div class="acc-header">
-            <i class="fa-solid fa-universal-access icon"></i>
-            <span>Accesibilidad</span>
+        <!-- PANEL DE ACCESIBILIDAD -->
+        <div class="acc-wrapper">
+            <div id="accBtn" class="acc-button" role="button" tabindex="0" aria-label="Abrir panel de accesibilidad">
+                <i class="fa-solid fa-universal-access"></i>
+            </div>
+            <div id="accPanel" class="acc-panel">
+                <div class="acc-header">
+                    <i class="fa-solid fa-universal-access"></i>
+                    <span>Accesibilidad</span>
+                </div>
+                <div class="acc-content">
+                    <div class="font-size-row">
+                        <button id="fontSmall" class="fs-btn">a -</button>
+                        <input type="range" min="12" max="30" value="16" id="fontRange">
+                        <button id="fontBig" class="fs-btn">A+</button>
+                    </div>
+                    <div class="darkmode-row">
+                        <span>Modo nocturno</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="acc-content">
-
-            <div class="font-size-row">
-                <button id="fontSmall" class="fs-btn">a -</button>
-                <input type="range" min="12" max="30" value="16" id="fontRange">
-                <button id="fontBig" class="fs-btn">A+</button>
-            </div>
-
-            <div class="darkmode-row">
-                <span>Modo nocturno</span>
-
-                <label class="switch">
-                    <input type="checkbox" id="darkToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-
+        <!-- CONTENIDO CENTRAL -->
         <div class="hero-content">
             <h2 class="welcome-title">Te damos la bienvenida al centro de ayuda de INFOMEX-INE</h2>
 
-            <div class="cards-grid">
-                <a href="guias.html" class="card">
-                    <h3>Guías del sistema</h3>
-                    <div class="card-icon"><i class="fa-regular fa-circle-question"></i></div>
-                </a>
-
-                <a href="documentosApoyo.html" class="card">
-                    <h3>Documentos del apoyo</h3>
-                    <div class="card-icon"><i class="fa-solid fa-book-open"></i></div>
-                </a>
-
-                <a href="glosario.html" class="card">
-                    <h3>Glosario</h3>
-                    <div class="abc-text">abc</div>
-                </a>
-
-                <a href="tutorial.html" class="card">
-                    <h3>Tutorial para versiones públicas</h3>
-                    <div class="card-icon"><i class="fa-regular fa-circle-play"></i></div>
-                </a>
-            </div>
+            <a href="guias.html" class="cta-btn" id="ctaGuiasUsuario">
+                <i class="fas fa-book-open"></i>
+                Guías de usuario
+            </a>
         </div>
+
     </main>
 
     <footer class="site-footer">
@@ -122,64 +86,44 @@
     </footer>
 
 
-
-
-
     <script>
-const accBtn = document.getElementById("accBtn");
-const accPanel = document.getElementById("accPanel");
+        // Panel accesibilidad
+        const accBtn = document.getElementById("accBtn");
+        const accPanel = document.getElementById("accPanel");
+        accBtn.onclick = () => accPanel.classList.toggle("open");
+        accBtn.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') accPanel.classList.toggle("open"); };
 
-// Abrir/cerrar panel
-accBtn.onclick = () => {
-    accPanel.classList.toggle("open");
-};
+        // Menú hamburguesa
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const headerNav = document.getElementById('headerNav');
+        if (mobileBtn && headerNav) {
+            mobileBtn.addEventListener('click', function () {
+                headerNav.classList.toggle('active');
+                const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                mobileBtn.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
 
-// ------------------------
-// TAMAÑO DE LETRA
-// ------------------------
-const range = document.getElementById("fontRange");
-const small = document.getElementById("fontSmall");
-const big = document.getElementById("fontBig");
+        // Tamaño de letra
+        const range = document.getElementById("fontRange");
+        const small = document.getElementById("fontSmall");
+        const big = document.getElementById("fontBig");
+        function applyFont() { document.documentElement.style.fontSize = range.value + "px"; }
+        range.oninput = applyFont;
+        small.onclick = () => { range.value = Math.max(12, parseInt(range.value) - 2); applyFont(); };
+        big.onclick = () => { range.value = Math.min(30, parseInt(range.value) + 2); applyFont(); };
 
-function applyFont() {
-    document.documentElement.style.fontSize = range.value + "px";
-}
-
-range.oninput = applyFont;
-
-small.onclick = () => {
-    range.value = Math.max(12, parseInt(range.value) - 2);
-    applyFont();
-};
-
-big.onclick = () => {
-    range.value = Math.min(30, parseInt(range.value) + 2);
-    applyFont();
-};
-
-// ------------------------
-// MODO NOCTURNO
-// ------------------------
-const darkToggle = document.getElementById("darkToggle");
-
-// Restaurar o predeterminar activado
-if (localStorage.getItem("darkmode") !== "0") {
-    document.body.classList.add("dark-mode");
-    darkToggle.checked = true;
-}
-
-darkToggle.onchange = () => {
-    document.body.classList.toggle("dark-mode");
-
-    if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("darkmode", "1");
-    } else {
-        localStorage.setItem("darkmode", "0");
-    }
-};
-</script>
-
-
+        // Modo nocturno
+        const darkToggle = document.getElementById("darkToggle");
+        if (localStorage.getItem("darkmode") !== "0") {
+            document.body.classList.add("dark-mode");
+            darkToggle.checked = true;
+        }
+        darkToggle.onchange = () => {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkmode", document.body.classList.contains("dark-mode") ? "1" : "0");
+        };
+    </script>
 
 </body>
 
