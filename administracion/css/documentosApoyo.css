@@ -1,4 +1,4 @@
-           * {
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -37,6 +37,23 @@
             font-size: 2.5em;
             font-weight: 300;
             margin: 0 15px;
+        }
+
+        .header-logo .tagline {
+            font-size: 0.9em;
+            line-height: 1.2;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .logo-link:hover {
+            opacity: 0.85;
         }
 
         .header-nav {
@@ -575,6 +592,10 @@ body.dark-mode footer,
 body.dark-mode footer * {
     background: #111 !important;
     color: white !important;
+}
+
+body.dark-mode .site-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 body.dark-mode .darkmode-row span {
