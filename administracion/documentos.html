@@ -33,598 +33,14 @@
 
 
 
-        <nav class="header-nav">
-            <a href="guias.html">Guías del sistema</a>
-            <a href="tutorial.html">Tutorial para<br>versiones públicas</a>
-            <a href="glosario.html">Glosario</a>
-        </nav>
-    </header>
-
-
-
-
-    <main class="main-content">
-
-        <div class="breadcrumb-container">
-            <nav class="breadcrumbs-nav">
-                <a href="index.html">Inicio</a> <span>/</span>
-                <a href="guias.html">Guía de usuario</a> <span>/</span>
-                <b id="bread-actual">Cargando...</b>
-            </nav>
-        </div>
-
-
-        <div class="header-info">
-            <h2 class="doc-title" id="titulo-doc">Guía visual: Cargando...</h2>
-            <div class="download-area">
-                <a id="link-modulo" class="download-link" download>
-                    Descargar guía del módulo <i class="fas fa-file-download"></i>
-                </a>
-                <a id="link-guia-completa" href="Infomex_Admin.pdf" class="download-link" download>
-                    Descargar guía completa <i class="fas fa-book"></i>
-                </a>
-            </div>
-        </div>
-
-
-
-        <div class="nav-buttons-container" style="justify-content: space-between;">
-            <button id="btn-anterior" class="nav-btn">
-                <i class="far fa-arrow-alt-circle-left"></i> Anterior
-            </button>
-            <button id="btn-siguiente" class="nav-btn">
-                Siguiente <i class="far fa-arrow-alt-circle-right"></i>
-            </button>
-        </div>
-
-
-
-        <div class="image-container" id="image-viewer-container">
-            <!-- Las imágenes se cargarán dinámicamente aquí -->
-        </div>
-
-
-
-
-    <!-- ========== PANEL DE ACCESIBILIDAD ========== -->
-<div class="acc-wrapper">
-
-    <!-- Botón lateral -->
-    <div id="accBtn" class="acc-button">
-        <i class="fa-solid fa-universal-access"></i>
-    </div>
-
-    <!-- Panel de accesibilidad -->
-    <div id="accPanel" class="acc-panel">
-
-        <div class="acc-header">
-            <i class="fa-solid fa-universal-access"></i>
-            <span>Accesibilidad</span>
-        </div>
-
-        <div class="acc-content">
-
-            <div class="font-size-row">
-                <button id="fontSmall" class="fs-btn">a -</button>
-                <input type="range" min="12" max="30" value="16" id="fontRange">
-                <button id="fontBig" class="fs-btn">A+</button>
-            </div>
-
-            <div class="darkmode-row">
-                <span>Modo nocturno</span>
-                <label class="switch">
-                    <input type="checkbox" id="darkToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- ============================================ -->
-
-
-
-
-
-
-
-
-
-
-
-
-    </main>
-
-
-
-
-    
-
-
-    <footer class="site-footer">
-        <div class="footer-content">
-            <img src="images/INE.png" alt="Logo" style="height:25px;">
-            <span>© INE México 2026</span>
-        </div>
-    </footer>
-
-
-
-
-
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const temaId = params.get('tema');
-
-        const biblioteca = {
-            // --- ADMINISTRACIÓN ---
-            'ingreso_al_sistema': { n: 'Ingreso al sistema', img: 'images/admin/4.png', mod: 'admin' },
-            'administración_de_cuentas': { n: 'Administración', img: ['images/admin/5.png', 'images/admin/6.png'], mod: 'admin' },
-            'registra_a_un_usuario': { n: 'Registra a un usuario', img: ['images/admin/5.png', 'images/admin/6.png'], mod: 'admin' },
-            'registra_a_un_usuario_de_partidos': { n: 'Registra a un usuario de\n Partidos Políticos', img: 'images/admin/7.png', mod: 'admin' },
-            'busca_usuarios_registrados': { n: 'Busca usuarios registrados', img: 'images/admin/8.png', mod: 'admin' },
-            'por_usu': { n: 'Búsqueda por Usuario', img: ['images/admin/8.png', 'images/admin/9.png'], mod: 'admin' },
-            'por_rol': { n: 'Búsqueda por Rol', img: 'images/admin/10.png', mod: 'admin' },
-
-            'mov': { n: 'Movimientos en Administración\n de cuentas', img: 'images/admin/11.png', mod: 'admin' },
-            'bitácora_de_acceso_al_sistema': { n: 'Bitácora de acceso al sistema', img: 'images/admin/12.png', mod: 'admin' },
-            'bitácora_de_acciones_por_usuario': { n: 'Bitácora de acciones por usuario', img: 'images/admin/13.png', mod: 'admin' },
-            'roles': { n: 'Cambio de rol', img: 'images/admin/14.png', mod: 'admin' },
-
-            'solicitudes': { n: 'Solicitudes manuales', img: ['images/admin/15.png', 'images/admin/16.png'], mod: 'admin' },
-            'tipo_de_solicitud': { n: 'Tipo de solicitud', img: 'images/admin/17.png', mod: 'admin' },
-            'registro_de_solicitud': { n: 'Registro de solicitud', img: ['images/admin/18.png', 'images/admin/19.png', 'images/admin/20.png'], mod: 'admin' },
-
-            'carga': { n: 'Carga solicitudes de la PNT', img: ['images/admin/21.png', 'images/admin/22.png', 'images/admin/23.png', 'images/admin/24.png', 'images/admin/25.png'], mod: 'admin' },
-            'estatus_de_solicitudes': { n: 'Estatus de solicitudes', img: 'images/admin/26.png', mod: 'admin' },
-            'solicitudes_recibidas': { n: 'Solicitudes recibidas', img: ['images/admin/27.png', 'images/admin/28.png'], mod: 'admin' },
-            'asignar_responsable': { n: 'Asignar responsables', img: ['images/admin/29.png', 'images/admin/30.png', 'images/admin/31.png'], mod: 'admin' },
-            'retirar_el_turno_a_las_áreas': { n: 'Retirar turno a áreas \n Solicitudes ARCOP', img: ['images/admin/32.png', 'images/admin/33.png', 'images/admin/34.png'], mod: 'admin' },
-            'devolución_de_turno': { n: 'Devolución de turno', img: ['images/admin/35.png', 'images/admin/36.png'], mod: 'admin' },
-            'responder': { n: 'Notoria incompetencia', img: ['images/admin/37.png', 'images/admin/38.png', 'images/admin/39.png'], mod: 'admin' },
-
-            'duplicada': { n: 'Duplicada', img: ['images/admin/40.png', 'images/admin/41.png'], mod: 'admin' },
-            'responsables': { n: 'Solicitar Requerimiento a\n áreas Responsables', img: ['images/admin/42.png', 'images/admin/43.png'], mod: 'admin' },
-
-
-            'solicitar_requerimiento_al': { n: 'Requerimiento de Aclaración (RA)', img: 'images/admin/44.png', mod: 'admin' },
-            'requerimiento_intermedio_de': { n: 'Requerimiento Intermedio (RII)', img: 'images/admin/45.png', mod: 'admin' },
-            'solicitud_recurso_revision': { n: 'Solicitar Requerimiento a un recurso de revisión', img: ['images/admin/46.png', 'images/admin/47.png', 'images/admin/48.png'], mod: 'admin' },
-
-            'arcop': { n: 'Solicitudes ARCOP', img: ['images/admin/49.png', 'images/admin/50.png'], mod: 'admin' },
-            'RA': { n: 'Requerimiento de Aclaración (RA)', img: 'images/admin/51.png', mod: 'admin' },
-            'RII': { n: 'Requerimiento Intermedio (RII)', img: 'images/admin/52.png', mod: 'admin' },
-
-            'solicitante': { n: 'Solicitudes de Acceso a la\n Información SAI', img: ['images/admin/53.png', 'images/admin/54.png', 'images/admin/55.png'], mod: 'admin' },
-            'responder_requerimiento': { n: 'Responder Requerimiento a nombre del solicitante', img: ['images/admin/56.png', 'images/admin/57.png', 'images/admin/58.png'], mod: 'admin' },
-            'solicitudes_arcop': { n: 'Vía Procedimental al solicitante - Solicitudes ARCOP', img: ['images/admin/59.png', 'images/admin/60.png', 'images/admin/61.png'], mod: 'admin' },
-            'sai_y_arcop': { n: 'SAI y ARCOP', img: ['images/admin/67.png', 'images/admin/68.png', 'images/admin/69.png', 'images/admin/70.png', 'images/admin/71.png'], mod: 'admin' },
-
-            'datos_del_previo_pago': { n: 'Datos del Previo Pago', img: ['images/admin/72.png', 'images/admin/73.png', 'images/admin/74.png', 'images/admin/75.png'], mod: 'admin' },
-            'previo_pago_asignar_responsables': { n: 'Previo Pago-Asignar responsables', img: ['images/admin/76.png', 'images/admin/77.png', 'images/admin/78.png'], mod: 'admin' },
-            'recurso_de_revisión': { n: 'Recurso de revisión', img: ['images/admin/79.png', 'images/admin/80.png', 'images/admin/81.png', 'images/admin/82.png'], mod: 'admin' },
-            'responsable': { n: 'Asignar responsables\n recurso revisión', img: ['images/admin/83.png', 'images/admin/84.png', 'images/admin/85.png'], mod: 'admin' },
-            'notificar_al_organo': { n: 'Notificar a Autoridad Garante', img: ['images/admin/86.png', 'images/admin/87.png', 'images/admin/88.png'], mod: 'admin' },
-            'sentido_de_resolución': { n: 'Sentido de resolución', img: ['images/admin/89.png', 'images/admin/90.png', 'images/admin/91.png', 'images/admin/92.png', 'images/admin/93.png'], mod: 'admin' },
-
-            'orden_de_cumplimiento': { n: 'Orden de cumplimiento', img: ['images/admin/94.png', 'images/admin/95.png', 'images/admin/96.png', 'images/admin/97.png'], mod: 'admin' },
-            'editar_folio_de_la_pnt': { n: 'Asignar folio PNT', img: 'images/admin/98.png', mod: 'admin' },
-            'desahogado': { n: 'Desahogado', img: 'images/admin/99.png', mod: 'admin' },
-            'notoria': { n: 'Notoria incompetencia', img: 'images/admin/99.png', mod: 'admin' },
-            'solARCOPSAI': { n: 'Solicitudes ARCOP y SAI', img: ['9images/admin/9.png', 'images/admin/100.png', 'images/admin/101.png'], mod: 'admin' },
-            'duplicada2': { n: 'Duplicada', img: 'images/admin/102.png', mod: 'admin' },
-            'solicitudes_arcop2': { n: 'Solicitudes ARCOP y SAI', img: ['images/admin/102.png', 'images/admin/103.png', 'images/admin/104.png'], mod: 'admin' },
-
-            'desahogado3': { n: 'Desahogado', img: 'images/admin/105.png', mod: 'admin' },
-            'responder_solicitudes3': { n: 'Responder (Concluir)\n Solicitudes SAI', img: ['images/admin/105.png', 'images/admin/106.png'], mod: 'admin' },
-
-            'expediente_virtual': { n: 'Búsqueda de Expedientes', img: ['images/admin/107.png', 'images/admin/108.png'], mod: 'admin' },
-            'editar_folio_de_la_pnt2': { n: 'Editar folio de la PNT', img: 'images/admin/109.png', mod: 'admin' },
-            'ingre_numero_de_expediente': { n: 'Ingresar número de expediente', img: 'images/admin/110.png', mod: 'admin' },
-            'regenerar_expedientes': { n: 'Regenerar Expedientes', img: 'images/admin/111.png', mod: 'admin' },
-            'detalle_del_expediente_virtual': { n: 'Detalle del expediente virtual', img: ['images/admin/112.png', 'images/admin/113.png'], mod: 'admin' },
-            'fecha_respuesta': { n: 'Actualizar fecha de respuesta de las áreas y la fecha de respuesta de la solicitud', img: ['images/admin/114.png', 'images/admin/115.png', 'images/admin/116.png'], mod: 'admin' },
-            'fecha_vencimiento': { n: 'Actualizar fecha de vencimiento', img: ['images/admin/117.png', 'images/admin/118.png', 'images/admin/119.png'], mod: 'admin' },
-
-
-
-
-            'solicitudes3': { n: 'Solicitudes', img: ['images/admin/120.png', 'images/admin/121.png'], mod: 'admin' },
-            'respuestas_solicitudes3': { n: 'Respuestas solicitudes', img: ['images/admin/122.png', 'images/admin/123.png'], mod: 'admin' },
-
-            'reportes_busqueda_general': { n: 'Búsqueda General', img: ['images/admin/124.png', 'images/admin/125.png'], mod: 'admin' },
-            'reportes_busqueda_otros': { n: 'Búsqueda Otros', img: 'images/admin/126.png', mod: 'admin' },
-            'reportes_indicadores': { n: 'Indicadores', img: 'images/admin/127.png', mod: 'admin' },
-
-            'descarga': { n: 'Descarga', img: 'images/admin/128.png', mod: 'admin' },
-            'carga': { n: 'Carga', img: 'images/admin/129.png', mod: 'admin' },
-            'buscador_de_solicitudes_sai': { n: 'Buscador Solicitudes SAI', img: ['images/admin/130.png', 'images/admin/131.png'], mod: 'admin' },
-            'buscador_de_solicitudes_arcop': { n: 'Buscador Solicitudes ARCOP', img: ['images/admin/132.png', 'images/admin/133.png'], mod: 'admin' },
-            'informes': { n: 'Informes fijos', img: ['images/admin/134.png', 'images/admin/135.png', 'images/admin/136.png'], mod: 'admin' },
-
-            'centro_de_ayuda': { n: 'Centro de Ayuda', img: 'images/admin/137.png', mod: 'admin' },
-            'notificaciones': { n: 'Notificaciones que recibe el usuario de parte del sistema', img: ['images/admin/138.png', 'images/admin/139.png', 'images/admin/140.png'], mod: 'admin' },
-
-            // --- UT-GESTIÓN
-            '1': { n: 'Ingreso al sistema', img: 'images/gestion/4.png', mod: 'ut' },
-            '2': { n: 'Solicitudes manuales', img: ['images/gestion/5.png', 'images/gestion/6.png'], mod: 'ut' },
-            '3': { n: 'Tipo de solicitud', img: 'images/gestion/7.png', mod: 'ut' },
-            '4': { n: 'Registro de solicitud', img: ['images/gestion/8.png', 'images/gestion/9.png', 'images/gestion/10.png'], mod: 'ut' },
-            '5': { n: 'Carga solicitudes de la Plataforma Nacional de Transparencia', img: ['images/gestion/11.png', 'images/gestion/12.png', 'images/gestion/13.png', 'images/gestion/14.png', 'images/gestion/15.png'], mod: 'ut' },
-            '6': { n: 'Estatus de solicitudes', img: 'images/gestion/16.png', mod: 'ut' },
-            '7': { n: 'Solicitudes recibidas', img: ['images/gestion/17.png', 'images/gestion/18.png'], mod: 'ut' },
-            '8': { n: 'Asignar responsable', img: ['images/gestion/19.png', 'images/gestion/20.png', 'images/gestion/21.png'], mod: 'ut' },
-            '9': { n: 'Retirar el turno a las\n áreas responsables', img: ['images/gestion/22.png', 'images/gestion/23.png', 'images/gestion/24.png'], mod: 'ut' },
-            '10': { n: 'Devolución de turno', img: ['images/gestion/25.png', 'images/gestion/26.png'], mod: 'ut' },
-            '11': { n: 'Notoria incompetencia', img: ['images/gestion/27.png', 'images/gestion/28.png', 'images/gestion/29.png'], mod: 'ut' },
-            '12': { n: 'Duplicada', img: ['images/gestion/30.png', 'images/gestion/31.png'], mod: 'ut' },
-            '13': { n: 'Requerimiento de Aclaración (RA)', img: ['images/gestion/32.png', 'images/gestion/33.png', 'images/gestion/34.png'], mod: 'ut' },
-            '14': { n: 'Requerimiento Intermedio de\n Información (RII)', img: 'images/gestion/35.png', mod: 'ut' },
-            '15': { n: 'Solicitar requerimiento a un\n recurso de revisión', img: ['images/gestion/36.png', 'images/gestion/37.png', 'images/gestion/38.png'], mod: 'ut' },
-            '16': { n: 'Requerimiento de Aclaración (RA)', img: ['images/gestion/39.png', 'images/gestion/40.png', 'images/gestion/41.png'], mod: 'ut' },
-            '17': { n: 'Requerimiento Intermedio de\n Información (RII)', img: 'images/gestion/42.png', mod: 'ut' },
-            '18': { n: 'Solicitar Requerimiento al\n solicitante', img: ['images/gestion/43.png', 'images/gestion/44.png', 'images/gestion/45.png'], mod: 'ut' },
-            '19': { n: 'Responder Requerimiento a nombre del responsable', img: ['images/gestion/46.png', 'images/gestion/47.png', 'images/gestion/48.png'], mod: 'ut' },
-            '20': { n: 'Solicitar Vía Procedimental\n al solicitante', img: ['images/gestion/49.png', 'images/gestion/50.png', 'images/gestion/51.png'], mod: 'ut' },
-            '21': { n: 'Responder Vía procedimental a nombre del solicitante', img: ['images/gestion/52.png', 'images/gestion/53.png'], mod: 'ut' },
-            '22': { n: 'Solicitar Prevención al solicitante', img: ['images/gestion/54.png', 'images/gestion/55.png', 'images/gestion/56.png'], mod: 'ut' },
-            '23': { n: 'Responder solicitudes', img: ['images/gestion/57.png', 'images/gestion/58.png', 'images/gestion/59.png', 'images/gestion/60.png', 'images/gestion/61.png'], mod: 'ut' },
-            '24': { n: 'Previo Pago-Asignar responsables', img: ['images/gestion/62.png', 'images/gestion/63.png', 'images/gestion/64.png', 'images/gestion/65.png', 'images/gestion/66.png', 'images/gestion/67.png', 'images/gestion/68.png'], mod: 'ut' },
-            '25': { n: 'Asignación Previo Pago', img: ['images/gestion/69.png', 'images/gestion/70.png'], mod: 'ut' },
-            '26': { n: 'Asignar responsable al recurso\n de revisión', img: ['images/gestion/71.png', 'images/gestion/72.png', 'images/gestion/73.png', 'images/gestion/74.png', 'images/gestion/75.png', 'images/gestion/76.png', 'images/gestion/77.png'], mod: 'ut' },
-            '27': { n: 'Notificar a Autoridad Garante', img: ['images/gestion/78.png', 'images/gestion/79.png', 'images/gestion/80.png'], mod: 'ut' },
-            '28': { n: 'Sentido de resolución', img: ['images/gestion/81.png', 'images/gestion/82.png', 'images/gestion/83.png', 'images/gestion/84.png', 'images/gestion/85.png'], mod: 'ut' },
-            '29': { n: 'Orden de cumplimiento', img: ['images/gestion/86.png', 'images/gestion/87.png', 'images/gestion/88.png', 'images/gestion/89.png'], mod: 'ut' },
-            '30': { n: 'Asignar folio PNT', img: 'images/gestion/90.png', mod: 'ut' },
-            '31': { n: 'Notoria incompetencia', img: ['images/gestion/91.png', 'images/gestion/92.png', 'images/gestion/93.png'], mod: 'ut' },
-            '32': { n: 'Duplicada', img: ['images/gestion/94.png', 'images/gestion/95.png'], mod: 'ut' },
-            '33': { n: 'Responder (concluir)', img: ['images/gestion/96.png', 'images/gestion/97.png', 'images/gestion/98.png'], mod: 'ut' },
-            '34': { n: 'Búsqueda de Expedientes', img: ['images/gestion/99.png', 'images/gestion/100.png'], mod: 'ut' },
-            '35': { n: 'Editar folio de la PNT', img: 'images/gestion/101.png', mod: 'ut' },
-            '36': { n: 'Ingresar número de expediente', img: 'images/gestion/102.png', mod: 'ut' },
-            '37': { n: 'Regenerar Expedientes', img: 'images/gestion/103.png', mod: 'ut' },
-            '38': { n: 'Detalle del expediente virtual', img: ['images/gestion/104.png', 'images/gestion/105.png'], mod: 'ut' },
-            '39': { n: 'Búsqueda General', img: ['images/gestion/106.png', 'images/gestion/107.png'], mod: 'ut' },
-            '40': { n: 'Búsqueda Otros', img: 'images/gestion/108.png', mod: 'ut' },
-            '41': { n: 'Indicadores', img: 'images/gestion/109.png', mod: 'ut' },
-            '42': { n: 'Descarga', img: 'images/gestion/110.png', mod: 'ut' },
-            '43': { n: 'Carga', img: 'images/gestion/111.png', mod: 'ut' },
-            '44': { n: 'Buscador de Solicitudes SAI', img: ['images/gestion/112.png', 'images/gestion/113.png'], mod: 'ut' },
-            '45': { n: 'Buscador de Solicitudes ARCOP', img: ['images/gestion/114.png', 'images/gestion/115.png'], mod: 'ut' },
-            '46': { n: 'Informes fijos', img: ['images/gestion/116.png', 'images/gestion/117.png', 'images/gestion/118.png'], mod: 'ut' },
-            '47': { n: 'Centro de Ayuda', img: 'images/gestion/119.png', mod: 'ut' },
-            '48': { n: 'Notificaciones que recibe el usuario del parte del sistema', img: ['images/gestion/120.png', 'images/gestion/121.png', 'images/gestion/122.png'], mod: 'ut' },
-
-
-            // --- AREAS RESPONSABLES
-            '49': { n: 'Atender una solicitud', img: ['images/area/3.png', 'images/area/4.png'], mod: 'ar' },
-            '50': { n: 'Pública', img: ['images/area/5.png', 'images/area/6.png', 'images/area/7.png'], mod: 'ar' },
-            '51': { n: 'Notoria incompetencia', img: 'images/area/8.png', mod: 'ar' },
-            '52': { n: 'Con clasificación', img: 'images/area/9.png', mod: 'ar' },
-            '53': { n: 'Solicitar Requerimiento en SAI', img: ['images/area/10.png', 'images/area/11.png'], mod: 'ar' },
-            '54': { n: 'Vía Procedimental\n solicitudes ARCOP', img: ['images/area/12.png', 'images/area/13.png'], mod: 'ar' },
-            '55': { n: 'Responder Requerimiento de\n Aclaración (RA)', img: ['images/area/14.png', 'images/area/15.png', 'images/area/16.png', 'images/area/17.png', 'images/area/18.png', 'images/area/19.png', 'images/area/20.png'], mod: 'ar' },
-            '56': { n: 'Responder Requerimiento de Información Adicional (RIA)', img: ['images/area/21.png', 'images/area/22.png', 'images/area/23.png', 'images/area/24.png'], mod: 'ar' },
-            '57': { n: 'Sugerencia de turno en ARCOP y SAI', img: ['images/area/25.png', 'images/area/26.png'], mod: 'ar' },
-            '58': { n: 'Responder Asignación Previo Pago', img: ['images/area/27.png', 'images/area/28.png'], mod: 'ar' },
-            '59': { n: 'Respuesta al Recurso de Revisión', img: ['images/area/29.png', 'images/area/30.png'], mod: 'ar' },
-            '60': { n: 'Responder orden de cumplimiento', img: ['images/area/31.png', 'images/area/32.png'], mod: 'ar' },
-            '61': { n: 'Observaciones del Directorio\n de Enlaces', img: ['images/area/33.png', 'images/area/34.png'], mod: 'ar' },
-            '62': { n: 'Capturar', img: ['images/area/35.png', 'images/area/36.png'], mod: 'ar' },
-            '63': { n: 'Capturar Anual', img: ['images/area/37.png', 'images/area/38.png'], mod: 'ar' },
-            '64': { n: 'Editar', img: 'images/area/39.png', mod: 'ar' },
-            '65': { n: 'Consultar', img: 'images/area/40.png', mod: 'ar' },
-            '66': { n: 'Buscador de Solicitudes SAI', img: ['images/area/41.png', 'images/area/42.png'], mod: 'ar' },
-            '67': { n: 'Buscador de Solicitudes ARCOP', img: ['images/area/43.png', 'images/area/44.png'], mod: 'ar' },
-            '68': { n: 'Estatus de las solicitudes', img: 'images/area/45.png', mod: 'ar' },
-            '69': { n: 'Centro de Ayuda', img: 'images/area/46.png', mod: 'ar' },
-            '70': { n: 'Notificaciones que recibe el usuario de parte del sistema', img: 'images/area/47.png', mod: 'ar' },
-
-            // --- COMITÉ DE TRANSPARENCIA
-            '71': { n: 'Ingreso al sistema', img: 'images/ct/3.png', mod: 'ct' },
-            '72': { n: 'Responder solicitudes que requieren pronunciamiento del Comité de Transparencia', img: ['images/ct/4.png', 'images/ct/5.png', 'images/ct/6.png', 'images/ct/7.png'], mod: 'ct' },
-            '73': { n: 'Responder solicitud de ampliación\n de plazo', img: 'images/ct/8.png', mod: 'ct' },
-            '74': { n: 'Respuestas', img: 'images/ct/9.png', mod: 'ct' },
-            '75': { n: 'Consultar Sesiones de Comité', img: ['images/ct/10.png', 'images/ct/11.png'], mod: 'ct' },
-            '76': { n: 'Consulta de información', img: 'images/ct/12.png', mod: 'ct' },
-            '77': { n: 'Datos personales', img: 'images/ct/12.png', mod: 'ct' },
-            '78': { n: 'Buscar Información de\n Datos Personales', img: 'images/ct/13.png', mod: 'ct' },
-            '79': { n: 'Buscar Catálogo de Datos\n Personales (CADA)', img: 'images/ct/14.png', mod: 'ct' },
-            '80': { n: 'Información Reservada', img: 'images/ct/15.png', mod: 'ct' },
-            '81': { n: 'Vigente', img: 'images/ct/15.png', mod: 'ct' },
-            '82': { n: 'Histórica', img: 'images/ct/16.png', mod: 'ct' },
-            '83': { n: 'Documentos testados', img: 'images/ct/17.png', mod: 'ct' },
-            '84': { n: 'Administración de Información', img: ['images/ct/18.png', 'images/ct/19.png', 'images/ct/20.png', , 'images/ct/21.png', 'images/ct/22.png'], mod: 'ct' },
-            '85': { n: 'Búsqueda de Expedientes', img: ['images/ct/23.png', 'images/ct/24.png'], mod: 'ct' },
-            '86': { n: 'Editar folio de la PNT', img: 'images/ct/25.png', mod: 'ct' },
-            '87': { n: 'Ingresar número de expediente', img: 'images/ct/26.png', mod: 'ct' },
-            '88': { n: 'Asignar o editar usuario', img: 'images/ct/27.png', mod: 'ct' },
-            '89': { n: 'Regenerar Expediente', img: 'images/ct/28.png', mod: 'ct' },
-            '90': { n: 'Detalle del expediente virtual', img: ['images/ct/29.png', 'images/ct/30.png'], mod: 'ct' },
-            '91': { n: 'Buscar', img: ['images/ct/31.png', 'images/ct/32.png'], mod: 'ct' },
-            '92': { n: 'Datos del expediente virtual', img: ['images/ct/33.png', 'images/ct/34.png'], mod: 'ct' },
-            '93': { n: 'Módulo Descargar', img: ['images/ct/35.png', 'images/ct/36.png'], mod: 'ct' },
-            '94': { n: 'Buscador de Solicitudes SAI', img: ['images/ct/37.png', 'images/ct/38.png'], mod: 'ct' },
-            '95': { n: 'Buscador de Solicitudes ARCOP', img: ['images/ct/39.png', 'images/ct/40.png'], mod: 'ct' },
-            '96': { n: 'Estatus de solicitudes', img: ['images/ct/41.png', 'images/ct/42.png'], mod: 'ct' },
-            '97': { n: 'Dar de baja una solicitud', img: ['images/ct/43.png', 'images/ct/44.png', 'images/ct/45.png'], mod: 'ct' },
-            '98': { n: 'Solicitudes de Acceso a\n la Información', img: ['images/ct/46.png', 'images/ct/47.png'], mod: 'ct' },
-            '99': { n: 'Solicitudes ARCOP', img: 'images/ct/48.png', mod: 'ct' },
-            '100': { n: 'Requerimiento de Aclaración (RA)', img: 'images/ct/49.png', mod: 'ct' },
-            '101': { n: 'Requerimiento Intermedio de\n Información (RII)', img: 'images/ct/50.png', mod: 'ct' },
-            '102': { n: 'Devolución de turno', img: ['images/ct/51.png', 'images/ct/52.png'], mod: 'ct' },
-            '103': { n: 'Centro de Ayuda', img: 'images/ct/53.png', mod: 'ct' },
-            '104': { n: 'Notificaciones que recibe el usuario de parte del sistema', img: 'images/ct/54.png', mod: 'ct' },
-
-
-
-            // --- INE - REVISOR
-            '105': { n: 'Ingreso al sistema', img: 'images/revisor/3.png', mod: 'rev' },
-            '106': { n: 'Atender una solicitud', img: 'images/revisor/4.png', mod: 'rev' },
-            '107': { n: 'Confirma y Sobresee', img: ['images/revisor/5.png', 'images/revisor/6.png', 'images/revisor/7.png'], mod: 'rev' },
-            '108': { n: 'Modifica, Revoca y Ordena', img: 'images/revisor/8.png', mod: 'rev' },
-            '109': { n: 'Orden de cumplimiento', img: ['images/revisor/9.png', 'images/revisor/10.png', 'images/revisor/11.png'], mod: 'rev' },
-            '110': { n: 'Notificar orden de cumplimiento', img: ['images/revisor/12.png', 'images/revisor/13.png', 'images/revisor/14.png'], mod: 'rev' },
-
-
-            // --- INE - CONSULTA
-            '111': { n: 'Ingreso al sistema', img: 'images/consulta/3.png', mod: 'con' },
-            '112': { n: 'Buscador de Solicitudes SAI', img: ['images/consulta/4.png', 'images/consulta/5.png'], mod: 'con' },
-            '113': { n: 'Buscador de Solicitudes ARCOP', img: ['images/consulta/6.png', 'images/consulta/7.png'], mod: 'con' },
-            '114': { n: 'Solicitudes', img: ['images/consulta/8.png', 'images/consulta/9.png'], mod: 'con' },
-
-        };
-
-        const claves = Object.keys(biblioteca);
-        const indexActual = claves.indexOf(temaId);
-
-        const container = document.getElementById('image-viewer-container');
-        const title = document.getElementById('titulo-doc');
-        const linkModulo = document.getElementById('link-modulo');
-        const bread = document.getElementById('bread-actual');
-        const btnAnterior = document.getElementById('btn-anterior');
-        const btnSiguiente = document.getElementById('btn-siguiente');
-
-        if (biblioteca[temaId]) {
-            const data = biblioteca[temaId];
-            title.innerText = data.n;
-            if (bread) bread.innerText = data.n;
-
-            // Actualizar color de fondo según el módulo
-            const mapaColores = {
-                'admin': '#eeeaf1',
-                'ut': '#ecf5f6',
-                'ar': '#fbe6f2',
-                'ct': '#f9f4f6',
-                'rev': '#ebebeb',
-                'con': '#d3dbef'
-            };
-            if (data.mod && mapaColores[data.mod]) {
-                document.body.style.backgroundColor = mapaColores[data.mod];
-            }
-
-            // Limpiar contenedor
-            container.innerHTML = '';
-
-            // Convertir img a array si es un string para manejarlo uniformemente
-            const imagenes = Array.isArray(data.img) ? data.img : [data.img];
-
-            // Función auxiliar para resolver la ruta de la imagen
-            const resolverRuta = (nombre) => {
-                // Si el nombre ya incluye una carpeta (tiene /), lo usamos tal cual
-                return nombre.includes('/') ? nombre : "img/" + nombre;
-            };
-
-            const primeraImagen = resolverRuta(imagenes[0]);
-
-            // Cargar todas las imágenes
-            imagenes.forEach(nombreImg => {
-                const imgElement = document.createElement('img');
-                imgElement.src = resolverRuta(nombreImg);
-                imgElement.alt = data.n;
-                container.appendChild(imgElement);
-            });
-
-            // Lógica Botón Anterior
-            btnAnterior.onclick = () => {
-                if (indexActual <= 0) {
-                    window.location.href = 'guias.html';
-                } else {
-                    window.location.href = `?tema=${claves[indexActual - 1]}`;
-                }
-            };
-
-            // Lógica Botón Siguiente
-            btnSiguiente.onclick = () => {
-                if (indexActual < claves.length - 1) {
-                    window.location.href = `?tema=${claves[indexActual + 1]}`;
-                } else {
-                    alert("Has llegado al final de la guía.");
-                }
-            };
-
-            // Ocultar Siguiente si es el último tema
-            if (indexActual === claves.length - 1) {
-                btnSiguiente.style.visibility = 'hidden';
-            }
-
-            // --- DESCARGA GUÍA COMPLETA (PDF según módulo) ---
-            const mapaPDF = {
-                'admin': 'assets/Infomex_Admin.pdf',
-                'ut': 'assets/Infomex_UTGestion.pdf',
-                'ar': 'assets/3-Areas_Responsables.pdf',
-                'ct': 'assets/Infomex_CT.pdf',
-                'rev': 'assets/Infomex_Revisor.pdf',
-                'con': 'assets/INE_Consulta.pdf'
-            };
-            const linkGuiaCompleta = document.getElementById('link-guia-completa');
-            if (data.mod && mapaPDF[data.mod]) {
-                linkGuiaCompleta.href = mapaPDF[data.mod];
-                linkGuiaCompleta.setAttribute('download', mapaPDF[data.mod]);
-            }
-
-            // --- DESCARGA GUÍA DEL MÓDULO (imagen única o ZIP) ---
-            const nombreBase = `Guia_${data.n.replace(/[\s/\\:*?"<>|]/g, '_')}`;
-
-            if (imagenes.length === 1) {
-                // --- Imagen única: descarga directa ---
-                fetch(primeraImagen)
-                    .then(r => r.ok ? r.blob() : Promise.reject())
-                    .then(blob => {
-                        const urlBlob = window.URL.createObjectURL(blob);
-                        linkModulo.href = urlBlob;
-                        const ext = imagenes[0].split('.').pop();
-                        linkModulo.setAttribute('download', `${nombreBase}.${ext}`);
-                    })
-                    .catch(() => {
-                        linkModulo.href = primeraImagen;
-                        linkModulo.setAttribute('download', imagenes[0].split('/').pop());
-                    });
-            } else {
-                // --- Múltiples imágenes: empaquetar como ZIP ---
-                linkModulo.removeAttribute('href');
-                linkModulo.removeAttribute('download');
-                linkModulo.style.cursor = 'pointer';
-
-                linkModulo.addEventListener('click', async function (e) {
-                    e.preventDefault();
-                    // Indicador visual de progreso
-                    const textoOriginal = linkModulo.innerHTML;
-                    linkModulo.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando ZIP...';
-                    linkModulo.style.pointerEvents = 'none';
-
-                    try {
-                        const zip = new JSZip();
-                        const carpeta = zip.folder(nombreBase);
-
-                        await Promise.all(imagenes.filter(Boolean).map(async (nombreImg) => {
-                            try {
-                                const r = await fetch(resolverRuta(nombreImg));
-                                if (r.ok) {
-                                    const blob = await r.blob();
-                                    carpeta.file(nombreImg.split('/').pop(), blob);
-                                }
-                            } catch (_) { /* imagen no disponible, se omite */ }
-                        }));
-
-                        const zipBlob = await zip.generateAsync({ type: 'blob' });
-                        const url = window.URL.createObjectURL(zipBlob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = `${nombreBase}.zip`;
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        window.URL.revokeObjectURL(url);
-                    } catch (err) {
-                        alert('Error al generar el ZIP. Verifica tu conexión e inténtalo de nuevo.');
-                    } finally {
-                        linkModulo.innerHTML = textoOriginal;
-                        linkModulo.style.pointerEvents = '';
-                    }
-                });
-            }
-
-        } else {
-            // Manejo de error si el tema no existe
-            title.innerText = "Error";
-            if (bread) bread.innerText = "No encontrado";
-            container.innerHTML = '<p style="padding: 20px;">No se encontró la información.</p>';
-            if (linkModulo) linkModulo.style.display = "none";
-            if (btnAnterior) btnAnterior.style.display = "none";
-            if (btnSiguiente) btnSiguiente.style.display = "none";
-        }
-    </script>
-
-
-
-
-<script>
-// Abrir/Cerrar panel
-const accBtn = document.getElementById("accBtn");
-const accPanel = document.getElementById("accPanel");
-accBtn.onclick = () => accPanel.classList.toggle("open");
-
-// Tamaño de letra
-const range = document.getElementById("fontRange");
-const small = document.getElementById("fontSmall");
-const big = document.getElementById("fontBig");
-
-function applyFont() {
-    document.documentElement.style.fontSize = range.value + "px";
-}
-range.oninput = applyFont;
-small.onclick = () => { range.value = Math.max(12, parseInt(range.value)-2); applyFont(); };
-big.onclick   = () => { range.value = Math.min(30, parseInt(range.value)+2); applyFont(); };
-
-// Modo nocturno
-const darkToggle = document.getElementById("darkToggle");
-
-// Cargar preferencia guardada o encender por defecto
-if (localStorage.getItem("darkmode") !== "0") {
-    document.body.classList.add("dark-mode");
-    darkToggle.checked = true;
-}
-
-// Guardar preferencia
-darkToggle.onchange = () => {
-    document.body.classList.toggle("dark-mode");
-    if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("darkmode","1");
-    } else {
-        localStorage.setItem("darkmode","0");
-    }
-};
-</script>
-
-
-
-
-
-</body>
-
-</html><!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizador - INFOMEX</title>
-
-    <!--
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>  -->
-    <link rel="stylesheet" type="text/css" href="css/documentos.css">
-    <link rel="stylesheet" type="text/css" href="css/font.css">
-    <link rel="stylesheet" type="text/css" href="css/all.min.css">
-
-</head>
-
-<body>
-
-
-    <header class="main-header">
-
-
-        <div class="header-logo">
-            <a href="index.html" class="logo-link">
-                <span class="brand">INFOMEX</span>
-                <span class="separator">|</span>
-                <span class="tagline">Sistema de acceso<br>a la información</span>
-            </a>
-        </div>
-
-
-
-
         <nav class="header-nav" id="headerNav">
-            <a href="guias.html">Guías del sistema</a>
-            <a href="tutorial.html">Tutorial para<br>versiones públicas</a>
+            <a href="guias.html">Guías de usuario</a>
+            <a href="tutorial.html">Tutorial de<br>versión pública</a>
+            <a href="documentosApoyo.html">Documentos<br>de apoyo</a>
             <a href="glosario.html">Glosario</a>
         </nav>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="headerNav">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false"
+            aria-controls="headerNav">
             <i class="fas fa-bars"></i>
         </button>
     </header>
@@ -637,7 +53,7 @@ darkToggle.onchange = () => {
         <div class="breadcrumb-container">
             <nav class="breadcrumbs-nav">
                 <a href="index.html">Inicio</a> <span>/</span>
-                <a href="guias.html">Guía de usuario</a> <span>/</span>
+                <a href="guias.html">Guías de usuario</a> <span>/</span>
                 <b id="bread-actual">Cargando...</b>
             </nav>
         </div>
@@ -646,10 +62,10 @@ darkToggle.onchange = () => {
         <div class="header-info">
             <h2 class="doc-title" id="titulo-doc">Guía visual: Cargando...</h2>
             <div class="download-area">
-                <a id="link-modulo" class="download-link" download>
+                <a id="link-modulo" class="download-link" target="_blank" download>
                     Descargar guía del módulo <i class="fas fa-file-download"></i>
                 </a>
-                <a id="link-guia-completa" href="Infomex_Admin.pdf" class="download-link" download>
+                <a id="link-guia-completa" href="Infomex_Admin.pdf" class="download-link" target="_blank" download>
                     Descargar guía completa <i class="fas fa-book"></i>
                 </a>
             </div>
@@ -675,42 +91,42 @@ darkToggle.onchange = () => {
 
 
 
-    <!-- ========== PANEL DE ACCESIBILIDAD ========== -->
-<div class="acc-wrapper">
+        <!-- ========== PANEL DE ACCESIBILIDAD ========== -->
+        <div class="acc-wrapper">
 
-    <!-- Botón lateral -->
-    <div id="accBtn" class="acc-button">
-        <i class="fa-solid fa-universal-access"></i>
-    </div>
-
-    <!-- Panel de accesibilidad -->
-    <div id="accPanel" class="acc-panel">
-
-        <div class="acc-header">
-            <i class="fa-solid fa-universal-access"></i>
-            <span>Accesibilidad</span>
-        </div>
-
-        <div class="acc-content">
-
-            <div class="font-size-row">
-                <button id="fontSmall" class="fs-btn">a -</button>
-                <input type="range" min="12" max="30" value="16" id="fontRange">
-                <button id="fontBig" class="fs-btn">A+</button>
+            <!-- Botón lateral -->
+            <div id="accBtn" class="acc-button">
+                <i class="fa-solid fa-universal-access"></i>
             </div>
 
-            <div class="darkmode-row">
-                <span>Modo nocturno</span>
-                <label class="switch">
-                    <input type="checkbox" id="darkToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
+            <!-- Panel de accesibilidad -->
+            <div id="accPanel" class="acc-panel">
 
+                <div class="acc-header">
+                    <i class="fa-solid fa-universal-access"></i>
+                    <span>Accesibilidad</span>
+                </div>
+
+                <div class="acc-content">
+
+                    <div class="font-size-row">
+                        <button id="fontSmall" class="fs-btn">a -</button>
+                        <input type="range" min="12" max="30" value="16" id="fontRange">
+                        <button id="fontBig" class="fs-btn">A+</button>
+                    </div>
+
+                    <div class="darkmode-row">
+                        <span>Modo nocturno</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<!-- ============================================ -->
+        <!-- ============================================ -->
 
 
 
@@ -728,7 +144,7 @@ darkToggle.onchange = () => {
 
 
 
-    
+
 
 
     <footer class="site-footer">
@@ -1101,6 +517,7 @@ darkToggle.onchange = () => {
                         const url = window.URL.createObjectURL(zipBlob);
                         const a = document.createElement('a');
                         a.href = url;
+                        a.target = '_blank';
                         a.download = `${nombreBase}.zip`;
                         document.body.appendChild(a);
                         a.click();
@@ -1129,58 +546,71 @@ darkToggle.onchange = () => {
 
 
 
-<script>
-// Abrir/Cerrar panel
-const accBtn = document.getElementById("accBtn");
-const accPanel = document.getElementById("accPanel");
-accBtn.onclick = () => accPanel.classList.toggle("open");
+    <script>
+        // Abrir/Cerrar panel
+        const accBtn = document.getElementById("accBtn");
+        const accPanel = document.getElementById("accPanel");
+        accBtn.onclick = () => accPanel.classList.toggle("open");
 
-// Menú hamburguesa
-const mobileBtn = document.getElementById('mobileMenuBtn');
-const headerNav = document.getElementById('headerNav');
-if (mobileBtn && headerNav) {
-    mobileBtn.addEventListener('click', function() {
-        headerNav.classList.toggle('active');
-        const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
-        mobileBtn.setAttribute('aria-expanded', !isExpanded);
-    });
-}
+        // Menú hamburguesa
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const headerNav = document.getElementById('headerNav');
+        if (mobileBtn && headerNav) {
+            mobileBtn.addEventListener('click', function () {
+                headerNav.classList.toggle('active');
+                const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                mobileBtn.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
 
-// Tamaño de letra
-const range = document.getElementById("fontRange");
-const small = document.getElementById("fontSmall");
-const big = document.getElementById("fontBig");
+        // Tamaño de letra
+        const range = document.getElementById("fontRange");
+        const small = document.getElementById("fontSmall");
+        const big = document.getElementById("fontBig");
 
-function applyFont() {
-    document.documentElement.style.fontSize = range.value + "px";
-}
-range.oninput = applyFont;
-small.onclick = () => { range.value = Math.max(12, parseInt(range.value)-2); applyFont(); };
-big.onclick   = () => { range.value = Math.min(30, parseInt(range.value)+2); applyFont(); };
+        function applyFont() {
+            document.documentElement.style.fontSize = range.value + "px";
+        }
+        range.oninput = applyFont;
+        small.onclick = () => { range.value = Math.max(12, parseInt(range.value) - 2); applyFont(); };
+        big.onclick = () => { range.value = Math.min(30, parseInt(range.value) + 2); applyFont(); };
 
-// Modo nocturno
-const darkToggle = document.getElementById("darkToggle");
+        // Modo nocturno
+        const darkToggle = document.getElementById("darkToggle");
 
-// Cargar preferencia guardada o encender por defecto
-if (localStorage.getItem("darkmode") !== "0") {
-    document.body.classList.add("dark-mode");
-    darkToggle.checked = true;
-}
+        // Cargar preferencia guardada o encender por defecto
+        if (localStorage.getItem("darkmode") !== "0") {
+            document.body.classList.add("dark-mode");
+            darkToggle.checked = true;
+        }
 
-// Guardar preferencia
-darkToggle.onchange = () => {
-    document.body.classList.toggle("dark-mode");
-    if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("darkmode","1");
-    } else {
-        localStorage.setItem("darkmode","0");
-    }
-};
-</script>
+        // Guardar preferencia
+        darkToggle.onchange = () => {
+            document.body.classList.toggle("dark-mode");
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("darkmode", "1");
+            } else {
+                localStorage.setItem("darkmode", "0");
+            }
+        };
+    </script>
 
+    <!-- Botón Volver Arriba -->
+    <button id="backToTopBtn" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-
-
+    <script>
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        if (backToTopBtn) {
+            window.addEventListener("scroll", () => {
+                backToTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+            });
+            backToTopBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+    </script>
 
 </body>
 
