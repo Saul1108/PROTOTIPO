@@ -1,4 +1,4 @@
-        * {
+       * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -21,6 +21,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .header-logo {
@@ -40,6 +43,23 @@
             margin: 0 15px;
         }
 
+        .header-logo .tagline {
+            font-size: 0.9em;
+            line-height: 1.2;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .logo-link:hover {
+            opacity: 0.85;
+        }
+
         .header-nav {
             display: flex;
             gap: 40px;
@@ -48,21 +68,14 @@
         .header-nav a {
             text-decoration: none;
             color: #333;
-            font-size: 1em;
+            font-size: 1rem;
             position: relative;
             padding: 10px 0;
             text-align: center;
-            display: inline-block;
-            min-height: 44px; /* Accesibilidad: Altura mínima */
+            min-height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .header-nav a:focus-visible {
-            outline: 3px solid #34a8f3;
-            outline-offset: 2px;
-            border-radius: 4px;
         }
 
         .header-nav a::after {
@@ -77,8 +90,7 @@
             transition: transform 0.3s ease;
         }
 
-        .header-nav a:hover::after,
-        .header-nav a:focus-visible::after {
+        .header-nav a:hover::after {
             transform: scaleX(1);
         }
 
@@ -88,7 +100,8 @@
             max-width: 1100px;
             padding: 0 60px;
             margin: 40px auto 20px;
-            font-size: 1rem; /* Accesibilidad: relativo al root */
+            font-size: 1rem;
+            /* Accesibilidad: relativo al root */
         }
 
         .breadcrumbs-nav {
@@ -163,12 +176,14 @@
             transition: all 0.3s ease;
             font-family: 'Roboto', sans-serif;
             border: 1px solid #ddd;
-            min-height: 44px; /* Accesibilidad: Altura mínima */
+            min-height: 44px;
+            /* Accesibilidad: Altura mínima */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            font-size: 1rem; /* Accesibilidad: que siga el tamaño root */
+            font-size: 1rem;
+            /* Accesibilidad: que siga el tamaño root */
         }
 
         .option-btn:focus-visible {
@@ -253,7 +268,8 @@
             color: #000000;
             padding: 18px 15px;
             text-align: center;
-            font-size: 1rem; /* Accesibilidad: escalar con el slider */
+            font-size: 1rem;
+            /* Accesibilidad: escalar con el slider */
             font-weight: 400;
             border: 1px solid #ddd;
             width: 100%;
@@ -289,7 +305,8 @@
             padding: 12px 20px;
             color: black;
             text-decoration: none;
-            font-size: 1rem; /* Accesibilidad: escalar con el slider */
+            font-size: 1rem;
+            /* Accesibilidad: escalar con el slider */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.2s;
         }
@@ -464,7 +481,7 @@
         .mobile-menu-btn:focus-visible {
             outline: 3px solid #34a8f3;
         }
-        
+
         .mobile-menu-btn:hover {
             background-color: rgba(0, 0, 0, 0.05);
         }
@@ -496,15 +513,18 @@
             .breadcrumb-container,
             .nav-buttons-container,
             .container {
-                padding: 0 20px; /* Reducir padding lateral en responsivo */
+                padding: 0 20px;
+                /* Reducir padding lateral en responsivo */
             }
 
             .mobile-menu-btn {
-                display: flex; /* Mostrar menú hamburguesa en mobile */
+                display: flex;
+                /* Mostrar menú hamburguesa en mobile */
             }
 
             .header-nav {
-                display: none; /* Oculto por defecto en mobile */
+                display: none;
+                /* Oculto por defecto en mobile */
                 width: 100%;
                 flex-direction: column;
                 gap: 15px;
@@ -521,7 +541,8 @@
             }
 
             .header-nav.active {
-                display: flex; /* Mostrar cuando se despliega */
+                display: flex;
+                /* Mostrar cuando se despliega */
             }
 
             .options-nav {
@@ -578,6 +599,40 @@
 
 
 
+
+        /* ============================================================
+   BOTÓN VOLVER ARRIBA
+============================================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            /* Oculto por defecto */
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .back-to-top:hover {
+            background-color: #2b8cce;
+            transform: translateY(-3px);
+        }
+
+        .back-to-top:focus-visible {
+            outline: 3px solid #005f9e;
+            outline-offset: 2px;
+        }
 
         /* ============================================================
    PANEL DE ACCESIBILIDAD (BOTÓN + PANEL)
@@ -773,18 +828,85 @@
 
         /* ============================================================
    COLUMNA DE MENÚS (MAIN-BUTTONS)
-   Fondo blanco, texto negro SIEMPRE
+   Fondo oscuro con color de tema en modo nocturno
 ============================================================ */
 
-        body.dark-mode .menu-item .main-button {
-            background: white !important;
+        /* Tema 1: Original */
+        body.dark-mode .theme-original .menu-item .main-button {
+            background: #b3a0c9 !important;
             color: black !important;
-            border-color: #ccc !important;
+            border-color: transparent !important;
         }
 
-        body.dark-mode .menu-item .main-button:hover {
-            background: #f2f2f2 !important;
+        body.dark-mode .theme-original .menu-item .main-button:hover,
+        body.dark-mode .theme-original .menu-item.is-open .main-button {
+            background: #732d91 !important;
+            color: white !important;
+        }
+
+        /* Tema 3: Verde */
+        body.dark-mode .theme-green .menu-item .main-button {
+            background: #a0cdd0 !important;
             color: black !important;
+            border-color: transparent !important;
+        }
+
+        body.dark-mode .theme-green .menu-item .main-button:hover,
+        body.dark-mode .theme-green .menu-item.is-open .main-button {
+            background: #409aa1 !important;
+            color: white !important;
+        }
+
+        /* Tema 4: Rojo */
+        body.dark-mode .theme-red .menu-item .main-button {
+            background: #ea80bf !important;
+            color: black !important;
+            border-color: transparent !important;
+        }
+
+        body.dark-mode .theme-red .menu-item .main-button:hover,
+        body.dark-mode .theme-red .menu-item.is-open .main-button {
+            background: #d5007f !important;
+            color: white !important;
+        }
+
+        /* Tema 5: Naranja */
+        body.dark-mode .theme-orange .menu-item .main-button {
+            background: #e3c8d4 !important;
+            color: black !important;
+            border-color: transparent !important;
+        }
+
+        body.dark-mode .theme-orange .menu-item .main-button:hover,
+        body.dark-mode .theme-orange .menu-item.is-open .main-button {
+            background: #c791a8 !important;
+            color: white !important;
+        }
+
+        /* Tema 7: Oscuro */
+        body.dark-mode .theme-dark .menu-item .main-button {
+            background: #e7e7e7 !important;
+            color: black !important;
+            border-color: transparent !important;
+        }
+
+        body.dark-mode .theme-dark .menu-item .main-button:hover,
+        body.dark-mode .theme-dark .menu-item.is-open .main-button {
+            background: #575453 !important;
+            color: white !important;
+        }
+
+        /* Tema 8: Violeta */
+        body.dark-mode .theme-violet .menu-item .main-button {
+            background: #80b1dc !important;
+            color: black !important;
+            border-color: transparent !important;
+        }
+
+        body.dark-mode .theme-violet .menu-item .main-button:hover,
+        body.dark-mode .theme-violet .menu-item.is-open .main-button {
+            background: #0063b8 !important;
+            color: white !important;
         }
 
         /* DROPDOWNS SÍ OSCUROS */
@@ -843,6 +965,10 @@
         body.dark-mode footer * {
             background: #111 !important;
             color: white !important;
+        }
+
+        body.dark-mode .site-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
 
