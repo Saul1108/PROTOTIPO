@@ -1,4 +1,4 @@
-       * {
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -1000,4 +1000,12 @@
         /* fondo interno también oscuro */
         body.dark-mode .container {
             background-color: transparent !important;
+        }
+
+        @media (min-width: 1024px) {
+            .back-to-top {
+                width: 65px;
+                height: 65px;
+                font-size: 26px;
+            }
         }
