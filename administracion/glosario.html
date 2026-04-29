@@ -613,6 +613,17 @@
         if (backToTopBtn) {
             window.addEventListener("scroll", () => {
                 backToTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+
+                let footer = document.querySelector('.site-footer');
+                if (footer) {
+                    let footerRect = footer.getBoundingClientRect();
+                    let windowHeight = window.innerHeight;
+                    if (footerRect.top < windowHeight) {
+                        backToTopBtn.style.bottom = (windowHeight - footerRect.top + 30) + 'px';
+                    } else {
+                        backToTopBtn.style.bottom = '30px';
+                    }
+                }
             });
             backToTopBtn.addEventListener("click", () => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
