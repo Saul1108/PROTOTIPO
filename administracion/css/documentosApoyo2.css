@@ -656,3 +656,11 @@
             background: #5d2a7a;
             color: white;
         }
+
+        @media (min-width: 1024px) {
+            .back-to-top {
+                width: 65px;
+                height: 65px;
+                font-size: 26px;
+            }
+        }
