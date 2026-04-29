@@ -801,6 +801,14 @@
             color: white;
         }
 
+        @media (min-width: 1024px) {
+            .back-to-top {
+                width: 65px;
+                height: 65px;
+                font-size: 26px;
+            }
+        }
+
         @media (max-width: 768px) {
             .main-header {
                 flex-direction: row;
