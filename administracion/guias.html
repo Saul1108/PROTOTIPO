@@ -54,6 +54,12 @@
             </a>
         </div>
 
+        <div class="info-text-container" style="max-width: 1100px; margin: 0 auto; padding: 20px 60px 20px 60px; text-align: center;">
+            <p style="font-size: 1.1rem; color: #444; line-height: 1.5;">
+                Aquí encontrarás instrucciones paso a paso para realizar procesos dentro del sistema de forma sencilla y eficiente.
+            </p>
+        </div>
+
         <!-- Menú de Opciones -->
         <div class="options-nav" role="tablist" aria-label="Menú de Opciones">
             <button class="option-btn active" onclick="showTab('tab1', this)" style="border-bottom: 3px solid #321b44;"
@@ -1009,6 +1015,17 @@
                     backToTopBtn.style.display = "flex";
                 } else {
                     backToTopBtn.style.display = "none";
+                }
+
+                let footer = document.querySelector('.site-footer');
+                if (footer) {
+                    let footerRect = footer.getBoundingClientRect();
+                    let windowHeight = window.innerHeight;
+                    if (footerRect.top < windowHeight) {
+                        backToTopBtn.style.bottom = (windowHeight - footerRect.top + 30) + 'px';
+                    } else {
+                        backToTopBtn.style.bottom = '30px';
+                    }
                 }
             });
             backToTopBtn.addEventListener("click", () => {
