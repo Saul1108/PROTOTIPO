@@ -319,7 +319,9 @@
             // --- LÓGICA DE BOTONES ---
 
             // 1. Botón Anterior
-            if (indexActual === 0) {
+            if (temaId === '1' || temaId === '11' || temaId === '16') {
+                btnAnterior.href = "documentosApoyo.html";
+            } else if (indexActual === 0) {
                 // Si es el primer tema ('info'), regresa a Bienvenida
                 btnAnterior.href = "index.html";
             } else {
@@ -413,6 +415,17 @@
         if (backToTopBtn) {
             window.addEventListener("scroll", () => {
                 backToTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+
+                let footer = document.querySelector('.site-footer');
+                if (footer) {
+                    let footerRect = footer.getBoundingClientRect();
+                    let windowHeight = window.innerHeight;
+                    if (footerRect.top < windowHeight) {
+                        backToTopBtn.style.bottom = (windowHeight - footerRect.top + 30) + 'px';
+                    } else {
+                        backToTopBtn.style.bottom = '30px';
+                    }
+                }
             });
             backToTopBtn.addEventListener("click", () => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
