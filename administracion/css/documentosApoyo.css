@@ -613,3 +613,7 @@
         body.dark-mode .darkmode-row span {
             color: #000 !important;
         }
+
+       body.dark-mode .info-text-container p {
+           color: #ffffff !important;
+       }
