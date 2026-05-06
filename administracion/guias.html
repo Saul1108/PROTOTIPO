@@ -914,7 +914,7 @@
     <div class="acc-wrapper">
 
         <!-- Botón lateral -->
-        <div id="accBtn" class="acc-button">
+        <div id="accBtn" class="acc-button" role="button" tabindex="0" aria-label="Abrir panel de accesibilidad" aria-expanded="false" aria-controls="accPanel">
             <i class="fa-solid fa-universal-access"></i>
         </div>
 
@@ -938,7 +938,7 @@
                     <span>Modo nocturno</span>
 
                     <label class="switch">
-                        <input type="checkbox" id="darkToggle">
+                        <input type="checkbox" id="darkToggle" role="switch" aria-label="Modo nocturno" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -974,6 +974,7 @@
         const accPanel = document.getElementById("accPanel");
 
         accBtn.onclick = () => accPanel.classList.toggle("open");
+        accBtn.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); accPanel.classList.toggle("open"); } };
 
         // Tamaño de letra
         const range = document.getElementById("fontRange");
