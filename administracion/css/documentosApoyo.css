@@ -550,10 +550,10 @@
 
         /* BREADCRUMB */
         body.dark-mode .breadcrumbs-nav *,
-        body.dark-mode .breadcrumbs-nav a,
-        .info-text-container {
+        body.dark-mode .breadcrumbs-nav a {
             color: white !important;
         }
+
 
         /* BOTÓN ANTERIOR */
         body.dark-mode .nav-btn,
