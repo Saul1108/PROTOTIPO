@@ -38,7 +38,7 @@
     </header>
 
     <div class="breadcrumb-container">
-        <nav class="breadcrumbs-nav">
+        <nav class="breadcrumbs-nav" aria-label="Ruta de navegación">
             <a href="index.html">Inicio</a>
             <span>/</span>
             <b>Tutorial de versión pública</b>
@@ -74,31 +74,42 @@
         <div class="acc-wrapper">
 
             <!-- Botón lateral -->
-            <div id="accBtn" class="acc-button">
-                <i class="fa-solid fa-universal-access"></i>
+            <div id="accBtn" class="acc-button"
+            role="button"
+            tabindex="0"
+            aria-label="Abrir panel de accesibilidad"
+            aria-expanded="false"
+            aria-controls="accPanel">
+
+            <i class="fa-solid fa-universal-access"></i>
             </div>
 
             <!-- Panel emergente -->
-            <div id="accPanel" class="acc-panel">
+            <div id="accPanel" class="acc-panel" 
+            role="region"
+            aria-labelledby="accTitle">
 
                 <div class="acc-header">
                     <i class="fa-solid fa-universal-access"></i>
-                    <span>Accesibilidad</span>
+                    <span id="accTitle">Accesibilidad</span>
                 </div>
 
                 <div class="acc-content">
 
                     <div class="font-size-row">
-                        <button id="fontSmall" class="fs-btn">a -</button>
+                        <button id="fontSmall" class="fs-btn" aria-label="Reducir tamaño del texto">a -</button>
                         <input type="range" min="12" max="30" value="16" id="fontRange">
-                        <button id="fontBig" class="fs-btn">A+</button>
+                        <button id="fontBig" class="fs-btn" aria-label="Aumentar tamaño del texto">A+</button>
                     </div>
 
                     <div class="darkmode-row">
                         <span>Modo nocturno</span>
 
                         <label class="switch">
-                            <input type="checkbox" id="darkToggle">
+                            <input type="checkbox" id="darkToggle" 
+                                role="switch"
+                                aria-label="Modo nocturno"
+                                onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -129,6 +140,7 @@
         const accPanel = document.getElementById("accPanel");
 
         accBtn.onclick = () => accPanel.classList.toggle("open");
+        accBtn.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); accPanel.classList.toggle("open"); } };
 
         // Tamaño de letra
         const range = document.getElementById("fontRange");
