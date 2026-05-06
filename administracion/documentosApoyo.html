@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentos Apoyo - Corregido</title>
+    <title>Documentos Apoyo</title>
 
     <!--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -52,9 +52,11 @@
         </a>
     </div>
 
-    <div class="info-text-container" style="max-width: 1100px; margin: 0 auto; padding: 20px 60px 20px 60px; text-align: center;">
+    <div class="info-text-container"
+        style="max-width: 1100px; margin: 0 auto; padding: 20px 60px 20px 60px; text-align: center;">
         <p style="font-size: 1.1rem; color: #444; line-height: 1.5;">
-            Aquí encontrarás materiales y recursos complementarios que te ayudarán a comprender mejor los procesos, consultar información relevante y facilitar tus actividades dentro del sistema.
+            Aquí encontrarás materiales y recursos complementarios que te ayudarán a comprender mejor los procesos,
+            consultar información relevante y facilitar tus actividades dentro del sistema.
         </p>
     </div>
 
@@ -115,7 +117,8 @@
     <div class="acc-wrapper">
 
         <!-- Botón lateral -->
-        <div id="accBtn" class="acc-button">
+        <div id="accBtn" class="acc-button" role="button" tabindex="0" aria-label="Abrir panel de accesibilidad"
+            aria-expanded="false" aria-controls="accPanel">
             <i class="fa-solid fa-universal-access"></i>
         </div>
 
@@ -141,7 +144,8 @@
                     <span>Modo nocturno</span>
 
                     <label class="switch">
-                        <input type="checkbox" id="darkToggle">
+                        <input type="checkbox" id="darkToggle" role="switch" aria-label="Modo nocturno"
+                            onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -249,6 +253,7 @@
         const accBtn = document.getElementById("accBtn");
         const accPanel = document.getElementById("accPanel");
         accBtn.onclick = () => accPanel.classList.toggle("open");
+        accBtn.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); accPanel.classList.toggle("open"); } };
 
         // ----- MENÚ HAMBURGUESA -----
         const mobileBtn = document.getElementById('mobileMenuBtn');
