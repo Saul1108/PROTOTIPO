@@ -470,7 +470,15 @@
         }
 
         .switch input {
-            display: none;
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+        .switch input:focus-visible + .slider {
+            outline: 2px solid #34a8f3;
+            outline-offset: 2px;
         }
 
         .slider {
