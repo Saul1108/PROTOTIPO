@@ -205,6 +205,7 @@
             'responder_requerimiento': { n: 'Responder Requerimiento a nombre del solicitante', img: ['images/admin/56.png', 'images/admin/57.png', 'images/admin/58.png'], mod: 'admin' },
             'solicitudes_arcop': { n: 'Vía Procedimental al solicitante - Solicitudes ARCOP', img: ['images/admin/59.png', 'images/admin/60.png', 'images/admin/61.png'], mod: 'admin' },
             'sai_y_arcop': { n: 'SAI y ARCOP', img: ['images/admin/67.png', 'images/admin/68.png', 'images/admin/69.png', 'images/admin/70.png', 'images/admin/71.png'], mod: 'admin' },
+            'tutorial_sai_y_arcop': { n: 'Tutorial SAI y ARCOP', vid: 'images/admin/tutorial_sai_y_arcop.mp4' , mod: 'admin' },
 
             'datos_del_previo_pago': { n: 'Datos del Previo Pago', img: ['images/admin/72.png', 'images/admin/73.png', 'images/admin/74.png', 'images/admin/75.png'], mod: 'admin' },
             'previo_pago_asignar_responsables': { n: 'Previo Pago-Asignar responsables', img: ['images/admin/76.png', 'images/admin/77.png', 'images/admin/78.png'], mod: 'admin' },
@@ -412,24 +413,116 @@
             // Limpiar contenedor
             container.innerHTML = '';
 
-            // Convertir img a array si es un string para manejarlo uniformemente
-            const imagenes = Array.isArray(data.img) ? data.img : [data.img];
-
-            // Función auxiliar para resolver la ruta de la imagen
+            // Función auxiliar para resolver la ruta de la imagen o video
             const resolverRuta = (nombre) => {
+                if (!nombre) return '';
                 // Si el nombre ya incluye una carpeta (tiene /), lo usamos tal cual
                 return nombre.includes('/') ? nombre : "img/" + nombre;
             };
 
-            const primeraImagen = resolverRuta(imagenes[0]);
+            const nombreBase = `Guia_${data.n.replace(/[\s/\\:*?"<>|]/g, '_')}`;
 
-            // Cargar todas las imágenes
-            imagenes.forEach(nombreImg => {
-                const imgElement = document.createElement('img');
-                imgElement.src = resolverRuta(nombreImg);
-                imgElement.alt = data.n;
-                container.appendChild(imgElement);
-            });
+            if (data.vid) {
+                // Cargar video
+                const videoElement = document.createElement('video');
+                videoElement.src = resolverRuta(data.vid);
+                videoElement.controls = true;
+                videoElement.style.width = '100%';
+                videoElement.style.maxWidth = '100%';
+                videoElement.style.height = 'auto';
+                videoElement.style.display = 'block';
+                videoElement.style.border = '1px solid #eee';
+                container.appendChild(videoElement);
+
+                // --- Configurar descarga del video ---
+                const videoUrl = resolverRuta(data.vid);
+                fetch(videoUrl)
+                    .then(r => r.ok ? r.blob() : Promise.reject())
+                    .then(blob => {
+                        const urlBlob = window.URL.createObjectURL(blob);
+                        linkModulo.href = urlBlob;
+                        const ext = data.vid.split('.').pop();
+                        linkModulo.setAttribute('download', `${nombreBase}.${ext}`);
+                    })
+                    .catch(() => {
+                        linkModulo.href = videoUrl;
+                        linkModulo.setAttribute('download', data.vid.split('/').pop());
+                    });
+
+            } else {
+                // Convertir img a array si es un string para manejarlo uniformemente
+                const imagenes = Array.isArray(data.img) ? data.img : [data.img];
+                const primeraImagen = resolverRuta(imagenes[0]);
+
+                // Cargar todas las imágenes
+                imagenes.forEach(nombreImg => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = resolverRuta(nombreImg);
+                    imgElement.alt = data.n;
+                    container.appendChild(imgElement);
+                });
+
+                // --- DESCARGA GUÍA DEL MÓDULO (imagen única o ZIP) ---
+                if (imagenes.length === 1) {
+                    // --- Imagen única: descarga directa ---
+                    fetch(primeraImagen)
+                        .then(r => r.ok ? r.blob() : Promise.reject())
+                        .then(blob => {
+                            const urlBlob = window.URL.createObjectURL(blob);
+                            linkModulo.href = urlBlob;
+                            const ext = imagenes[0].split('.').pop();
+                            linkModulo.setAttribute('download', `${nombreBase}.${ext}`);
+                        })
+                        .catch(() => {
+                            linkModulo.href = primeraImagen;
+                            linkModulo.setAttribute('download', imagenes[0].split('/').pop());
+                        });
+                } else {
+                    // --- Múltiples imágenes: empaquetar como ZIP ---
+                    linkModulo.removeAttribute('href');
+                    linkModulo.removeAttribute('download');
+                    linkModulo.style.cursor = 'pointer';
+
+                    linkModulo.addEventListener('click', async function (e) {
+                        e.preventDefault();
+                        // Indicador visual de progreso
+                        const textoOriginal = linkModulo.innerHTML;
+                        linkModulo.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando ZIP...';
+                        linkModulo.style.pointerEvents = 'none';
+
+                        try {
+                            const zip = new JSZip();
+                            const carpeta = zip.folder(nombreBase);
+
+                            await Promise.all(imagenes.filter(Boolean).map(async (nombreImg) => {
+                                try {
+                                    const r = await fetch(resolverRuta(nombreImg));
+                                    if (r.ok) {
+                                        const blob = await r.blob();
+                                        carpeta.file(nombreImg.split('/').pop(), blob);
+                                    }
+                                } catch (_) { /* imagen no disponible, se omite */ }
+                            }));
+
+                            const zipBlob = await zip.generateAsync({ type: 'blob' });
+                            const url = window.URL.createObjectURL(zipBlob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.target = '_blank';
+                            a.download = `${nombreBase}.zip`;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            window.URL.revokeObjectURL(url);
+                        } catch (err) {
+                            alert('Error al generar el ZIP. Verifica tu conexión e inténtalo de nuevo.');
+                        } finally {
+                            linkModulo.innerHTML = textoOriginal;
+                            linkModulo.style.pointerEvents = '';
+                        }
+                    });
+                }
+            }
 
             // Lógica Botón Anterior
             btnAnterior.onclick = () => {
@@ -467,69 +560,6 @@
             if (data.mod && mapaPDF[data.mod]) {
                 linkGuiaCompleta.href = mapaPDF[data.mod];
                 linkGuiaCompleta.setAttribute('download', mapaPDF[data.mod]);
-            }
-
-            // --- DESCARGA GUÍA DEL MÓDULO (imagen única o ZIP) ---
-            const nombreBase = `Guia_${data.n.replace(/[\s/\\:*?"<>|]/g, '_')}`;
-
-            if (imagenes.length === 1) {
-                // --- Imagen única: descarga directa ---
-                fetch(primeraImagen)
-                    .then(r => r.ok ? r.blob() : Promise.reject())
-                    .then(blob => {
-                        const urlBlob = window.URL.createObjectURL(blob);
-                        linkModulo.href = urlBlob;
-                        const ext = imagenes[0].split('.').pop();
-                        linkModulo.setAttribute('download', `${nombreBase}.${ext}`);
-                    })
-                    .catch(() => {
-                        linkModulo.href = primeraImagen;
-                        linkModulo.setAttribute('download', imagenes[0].split('/').pop());
-                    });
-            } else {
-                // --- Múltiples imágenes: empaquetar como ZIP ---
-                linkModulo.removeAttribute('href');
-                linkModulo.removeAttribute('download');
-                linkModulo.style.cursor = 'pointer';
-
-                linkModulo.addEventListener('click', async function (e) {
-                    e.preventDefault();
-                    // Indicador visual de progreso
-                    const textoOriginal = linkModulo.innerHTML;
-                    linkModulo.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando ZIP...';
-                    linkModulo.style.pointerEvents = 'none';
-
-                    try {
-                        const zip = new JSZip();
-                        const carpeta = zip.folder(nombreBase);
-
-                        await Promise.all(imagenes.filter(Boolean).map(async (nombreImg) => {
-                            try {
-                                const r = await fetch(resolverRuta(nombreImg));
-                                if (r.ok) {
-                                    const blob = await r.blob();
-                                    carpeta.file(nombreImg.split('/').pop(), blob);
-                                }
-                            } catch (_) { /* imagen no disponible, se omite */ }
-                        }));
-
-                        const zipBlob = await zip.generateAsync({ type: 'blob' });
-                        const url = window.URL.createObjectURL(zipBlob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.target = '_blank';
-                        a.download = `${nombreBase}.zip`;
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        window.URL.revokeObjectURL(url);
-                    } catch (err) {
-                        alert('Error al generar el ZIP. Verifica tu conexión e inténtalo de nuevo.');
-                    } finally {
-                        linkModulo.innerHTML = textoOriginal;
-                        linkModulo.style.pointerEvents = '';
-                    }
-                });
             }
 
         } else {
