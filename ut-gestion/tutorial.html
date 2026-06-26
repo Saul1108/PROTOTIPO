@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosario - INFOMEX-INE</title>
+    <!--  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">   -->
+    <link rel="stylesheet" type="text/css" href="css/tutorial.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+
+</head>
+
+<body>
+
+    <header class="main-header">
+
+        <div class="header-logo">
+            <a href="index.html" class="logo-link">
+                <span class="brand">INFOMEX</span>
+                <span class="separator">|</span>
+                <span class="tagline">Sistema de acceso<br>a la información</span>
+            </a>
+        </div>
+
+        <nav class="header-nav" id="headerNav">
+            <a href="guias.html">Guías de usuario</a>
+            <a href="tutorial.html">Tutorial de<br>versión pública</a>
+            <a href="documentosApoyo.html">Documentos<br>de apoyo</a>
+            <a href="glosario.html">Glosario</a>
+        </nav>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="headerNav">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <div class="breadcrumb-container">
+        <nav class="breadcrumbs-nav" aria-label="Ruta de navegación">
+            <a href="index.html">Inicio</a>
+            <span>/</span>
+            <b>Tutorial de versión pública</b>
+        </nav>
+    </div>
+
+    <main class="container">
+
+        <h1 class="page-title">Tutorial de versión pública</h1>
+
+
+        <div class="title-divider"></div>
+
+        <div class="nav-buttons-container">
+            <a href="index.html" class="nav-btn">
+                <i class="far fa-arrow-alt-circle-left"></i> Anterior
+            </a>
+        </div>
+
+
+        <div class="image-header">
+            <img src="images/imagenTutorial.png" alt="Encabezado Tutorial">
+        </div>
+
+        <div class="video-container">
+            <video controls>
+                <source src="assets/version-publica.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de videos.
+            </video>
+        </div>
+
+        <!-- ========== PANEL DE ACCESIBILIDAD ========== -->
+        <div class="acc-wrapper">
+
+            <!-- Botón lateral -->
+            <div id="accBtn" class="acc-button"
+            role="button"
+            tabindex="0"
+            aria-label="Abrir panel de accesibilidad"
+            aria-expanded="false"
+            aria-controls="accPanel">
+
+            <i class="fa-solid fa-universal-access"></i>
+            </div>
+
+            <!-- Panel emergente -->
+            <div id="accPanel" class="acc-panel" 
+            role="region"
+            aria-labelledby="accTitle">
+
+                <div class="acc-header">
+                    <i class="fa-solid fa-universal-access"></i>
+                    <span id="accTitle">Accesibilidad</span>
+                </div>
+
+                <div class="acc-content">
+
+                    <div class="font-size-row">
+                        <button id="fontSmall" class="fs-btn" aria-label="Reducir tamaño del texto">a -</button>
+                        <input type="range" min="12" max="30" value="16" id="fontRange">
+                        <button id="fontBig" class="fs-btn" aria-label="Aumentar tamaño del texto">A+</button>
+                    </div>
+
+                    <div class="darkmode-row">
+                        <span>Modo nocturno</span>
+
+                        <label class="switch">
+                            <input type="checkbox" id="darkToggle" 
+                                role="switch"
+                                aria-label="Modo nocturno"
+                                onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- ========== FIN PANEL DE ACCESIBILIDAD ========== -->
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="images/INE.png" alt="Logo" style="height:25px;">
+            <span>© INE México 2026</span>
+        </div>
+    </footer>
+
+
+
+
+    <script>
+        // Abrir/Cerrar panel
+        const accBtn = document.getElementById("accBtn");
+        const accPanel = document.getElementById("accPanel");
+
+        accBtn.onclick = () => accPanel.classList.toggle("open");
+        accBtn.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); accPanel.classList.toggle("open"); } };
+
+        // Tamaño de letra
+        const range = document.getElementById("fontRange");
+        const small = document.getElementById("fontSmall");
+        const big = document.getElementById("fontBig");
+
+        function applyFont() {
+            document.documentElement.style.fontSize = range.value + "px";
+        }
+
+        range.oninput = applyFont;
+        small.onclick = () => { range.value = Math.max(12, parseInt(range.value) - 2); applyFont(); };
+        big.onclick = () => { range.value = Math.min(30, parseInt(range.value) + 2); applyFont(); };
+
+        // Modo nocturno
+        const darkToggle = document.getElementById("darkToggle");
+
+        // Cargar preferencia o encender por defecto
+        if (localStorage.getItem("darkmode") !== "0") {
+            document.body.classList.add("dark-mode");
+            darkToggle.checked = true;
+        }
+
+        darkToggle.onchange = () => {
+            document.body.classList.toggle("dark-mode");
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("darkmode", "1");
+            } else {
+                localStorage.setItem("darkmode", "0");
+            }
+        };
+
+        // Menú hamburguesa
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const headerNav = document.getElementById('headerNav');
+        if (mobileBtn && headerNav) {
+            mobileBtn.addEventListener('click', function () {
+                headerNav.classList.toggle('active');
+                const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                mobileBtn.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
+    </script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>
