@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador - INFOMEX</title>
+
+    <link rel="stylesheet" type="text/css" href="css/documentos.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+
+</head>
+
+<body>
+
+
+    <header class="main-header">
+
+
+        <div class="header-logo">
+            <a href="index.html" class="logo-link">
+                <span class="brand">INFOMEX</span>
+                <span class="separator">|</span>
+                <span class="tagline">Sistema de acceso<br>a la información</span>
+            </a>
+        </div>
+
+
+
+
+        <nav class="header-nav" id="headerNav">
+            <a href="guias.html">Guías de usuario</a>
+            <a href="tutorial.html">Tutorial de<br>versión pública</a>
+            <a href="documentosApoyo.html">Documentos<br>de apoyo</a>
+            <a href="glosario.html">Glosario</a>
+        </nav>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false"
+            aria-controls="headerNav">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+
+
+
+    <main class="main-content">
+
+        <div class="breadcrumb-container">
+            <nav class="breadcrumbs-nav">
+                <a href="index.html">Inicio</a> <span>/</span>
+                <a href="guias.html">Guías de usuario</a> <span>/</span>
+                <b id="bread-actual">Cargando...</b>
+            </nav>
+        </div>
+
+
+        <div class="header-info">
+            <h2 class="doc-title" id="titulo-doc">Guía visual: Cargando...</h2>
+            <div class="download-area">
+                <a id="link-modulo" class="download-link" target="_blank" download>
+                    Descargar guía del módulo <i class="fas fa-file-download"></i>
+                </a>
+                <a id="link-guia-completa" href="Infomex_Admin.pdf" class="download-link" target="_blank" download>
+                    Descargar guía completa <i class="fas fa-book"></i>
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="nav-buttons-container" style="justify-content: space-between;">
+            <button id="btn-anterior" class="nav-btn">
+                <i class="far fa-arrow-alt-circle-left"></i> Anterior
+            </button>
+            <button id="btn-siguiente" class="nav-btn">
+                Siguiente <i class="far fa-arrow-alt-circle-right"></i>
+            </button>
+        </div>
+
+
+
+        <div class="image-container" id="image-viewer-container">
+            <!-- Las imágenes se cargarán dinámicamente aquí -->
+        </div>
+
+
+
+
+        <!-- ========== PANEL DE ACCESIBILIDAD ========== -->
+        <div class="acc-wrapper">
+
+            <!-- Botón lateral -->
+            <div id="accBtn" class="acc-button" role="button" tabindex="0" aria-label="Abrir panel de accesibilidad" aria-expanded="false" aria-controls="accPanel">
+                <i class="fa-solid fa-universal-access"></i>
+            </div>
+
+            <!-- Panel de accesibilidad -->
+            <div id="accPanel" class="acc-panel">
+
+                <div class="acc-header">
+                    <i class="fa-solid fa-universal-access"></i>
+                    <span>Accesibilidad</span>
+                </div>
+
+                <div class="acc-content">
+
+                    <div class="font-size-row">
+                        <button id="fontSmall" class="fs-btn">a -</button>
+                        <input type="range" min="12" max="30" value="16" id="fontRange">
+                        <button id="fontBig" class="fs-btn">A+</button>
+                    </div>
+
+                    <div class="darkmode-row">
+                        <span>Modo nocturno</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkToggle" role="switch" aria-label="Modo nocturno" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- ============================================ -->
+
+
+
+    </main>
+
+
+
+
+
+
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="images/INE.png" alt="Logo" style="height:25px;">
+            <span>© INE México 2026</span>
+        </div>
+    </footer>
+
+
+
+
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const temaId = params.get('tema');
+
+        const biblioteca = {
+    
+            // --- COMITÉ DE TRANSPARENCIA
+            '71': { n: 'Ingreso al sistema', img: 'images/ct/3.png', mod: 'ct' },
+            '72': { n: 'Responder solicitudes que requieren pronunciamiento del Comité de Transparencia', img: ['images/ct/4.png', 'images/ct/5.png', 'images/ct/6.png', 'images/ct/7.png'], mod: 'ct' },
+            '73': { n: 'Responder solicitud de ampliación\n de plazo', img: 'images/ct/8.png', mod: 'ct' },
+            '74': { n: 'Respuestas', img: 'images/ct/9.png', mod: 'ct' },
+            '75': { n: 'Consultar Sesiones de Comité', img: ['images/ct/10.png', 'images/ct/11.png'], mod: 'ct' },
+            '76': { n: 'Consulta de información', img: 'images/ct/12.png', mod: 'ct' },
+            '77': { n: 'Datos personales', img: 'images/ct/12.png', mod: 'ct' },
+            '78': { n: 'Buscar Información de\n Datos Personales', img: 'images/ct/13.png', mod: 'ct' },
+            '79': { n: 'Buscar Catálogo de Datos\n Personales (CADA)', img: 'images/ct/14.png', mod: 'ct' },
+            '80': { n: 'Información Reservada', img: 'images/ct/15.png', mod: 'ct' },
+            '81': { n: 'Vigente', img: 'images/ct/15.png', mod: 'ct' },
+            '82': { n: 'Histórica', img: 'images/ct/16.png', mod: 'ct' },
+            '83': { n: 'Documentos testados', img: 'images/ct/17.png', mod: 'ct' },
+            '84': { n: 'Administración de Información', img: ['images/ct/18.png', 'images/ct/19.png', 'images/ct/20.png', , 'images/ct/21.png', 'images/ct/22.png'], mod: 'ct' },
+            '85': { n: 'Búsqueda de Expedientes', img: ['images/ct/23.png', 'images/ct/24.png'], mod: 'ct' },
+            '86': { n: 'Editar folio de la PNT', img: 'images/ct/25.png', mod: 'ct' },
+            '87': { n: 'Ingresar número de expediente', img: 'images/ct/26.png', mod: 'ct' },
+            '88': { n: 'Asignar o editar usuario', img: 'images/ct/27.png', mod: 'ct' },
+            '89': { n: 'Regenerar Expediente', img: 'images/ct/28.png', mod: 'ct' },
+            '90': { n: 'Detalle del expediente virtual', img: ['images/ct/29.png', 'images/ct/30.png'], mod: 'ct' },
+            '91': { n: 'Buscar', img: ['images/ct/31.png', 'images/ct/32.png'], mod: 'ct' },
+            '92': { n: 'Datos del expediente virtual', img: ['images/ct/33.png', 'images/ct/34.png'], mod: 'ct' },
+            '93': { n: 'Módulo Descargar', img: ['images/ct/35.png', 'images/ct/36.png'], mod: 'ct' },
+            '94': { n: 'Buscador de Solicitudes SAI', img: ['images/ct/37.png', 'images/ct/38.png'], mod: 'ct' },
+            '95': { n: 'Buscador de Solicitudes ARCOP', img: ['images/ct/39.png', 'images/ct/40.png'], mod: 'ct' },
+            '96': { n: 'Estatus de solicitudes', img: ['images/ct/41.png', 'images/ct/42.png'], mod: 'ct' },
+            '97': { n: 'Dar de baja una solicitud', img: ['images/ct/43.png', 'images/ct/44.png', 'images/ct/45.png'], mod: 'ct' },
+            '98': { n: 'Solicitudes de Acceso a\n la Información', img: ['images/ct/46.png', 'images/ct/47.png'], mod: 'ct' },
+            '99': { n: 'Solicitudes ARCOP', img: 'images/ct/48.png', mod: 'ct' },
+            '100': { n: 'Requerimiento de Aclaración (RA)', img: 'images/ct/49.png', mod: 'ct' },
+            '101': { n: 'Requerimiento Intermedio de\n Información (RII)', img: 'images/ct/50.png', mod: 'ct' },
+            '102': { n: 'Devolución de turno', img: ['images/ct/51.png', 'images/ct/52.png'], mod: 'ct' },
+            '103': { n: 'Centro de Ayuda', img: 'images/ct/53.png', mod: 'ct' },
+            '104': { n: 'Notificaciones que recibe el usuario de parte del sistema', img: 'images/ct/54.png', mod: 'ct' },
+
+        };
+
+        const claves = Object.keys(biblioteca);
+        const indexActual = claves.indexOf(temaId);
+
+        const container = document.getElementById('image-viewer-container');
+        const title = document.getElementById('titulo-doc');
+        const linkModulo = document.getElementById('link-modulo');
+        const bread = document.getElementById('bread-actual');
+        const btnAnterior = document.getElementById('btn-anterior');
+        const btnSiguiente = document.getElementById('btn-siguiente');
+
+        if (biblioteca[temaId]) {
+            const data = biblioteca[temaId];
+            title.innerText = data.n;
+            if (bread) bread.innerText = data.n;
+
+            // Actualizar color de fondo según el módulo
+            const mapaColores = {
+                'ut': '#f9f4f6',
+                'ar': '#f9f4f6',
+            };
+            if (data.mod && mapaColores[data.mod]) {
+                document.body.style.backgroundColor = mapaColores[data.mod];
+            }
+
+            // Limpiar contenedor
+            container.innerHTML = '';
+
+            // Función auxiliar para resolver la ruta de la imagen o video
+            const resolverRuta = (nombre) => {
+                if (!nombre) return '';
+                // Si el nombre ya incluye una carpeta (tiene /), lo usamos tal cual
+                return nombre.includes('/') ? nombre : "img/" + nombre;
+            };
+
+            const nombreBase = `Guia_${data.n.replace(/[\s/\\:*?"<>|]/g, '_')}`;
+
+            if (data.vid) {
+                // Cargar video
+                const videoElement = document.createElement('video');
+                videoElement.src = resolverRuta(data.vid);
+                videoElement.controls = true;
+                videoElement.style.width = '100%';
+                videoElement.style.maxWidth = '100%';
+                videoElement.style.height = 'auto';
+                videoElement.style.display = 'block';
+                videoElement.style.border = '1px solid #eee';
+                container.appendChild(videoElement);
+
+                // --- Configurar descarga del video ---
+                const videoUrl = resolverRuta(data.vid);
+                fetch(videoUrl)
+                    .then(r => r.ok ? r.blob() : Promise.reject())
+                    .then(blob => {
+                        const urlBlob = window.URL.createObjectURL(blob);
+                        linkModulo.href = urlBlob;
+                        const ext = data.vid.split('.').pop();
+                        linkModulo.setAttribute('download', `${nombreBase}.${ext}`);
+                    })
+                    .catch(() => {
+                        linkModulo.href = videoUrl;
+                        linkModulo.setAttribute('download', data.vid.split('/').pop());
+                    });
+
+            } else {
+                // Convertir img a array si es un string para manejarlo uniformemente
+                const imagenes = Array.isArray(data.img) ? data.img : [data.img];
+                const primeraImagen = resolverRuta(imagenes[0]);
+
+                // Cargar todas las imágenes
+                imagenes.forEach(nombreImg => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = resolverRuta(nombreImg);
+                    imgElement.alt = data.n;
+                    container.appendChild(imgElement);
+                });
+
+                // --- DESCARGA GUÍA DEL MÓDULO (imagen única o ZIP) ---
+                if (imagenes.length === 1) {
+                    // --- Imagen única: descarga directa ---
+                    fetch(primeraImagen)
+                        .then(r => r.ok ? r.blob() : Promise.reject())
+                        .then(blob => {
+                            const urlBlob = window.URL.createObjectURL(blob);
+                            linkModulo.href = urlBlob;
+                            const ext = imagenes[0].split('.').pop();
+                            linkModulo.setAttribute('download', `${nombreBase}.${ext}`);
+                        })
+                        .catch(() => {
+                            linkModulo.href = primeraImagen;
+                            linkModulo.setAttribute('download', imagenes[0].split('/').pop());
+                        });
+                } else {
+                    // --- Múltiples imágenes: empaquetar como ZIP ---
+                    linkModulo.removeAttribute('href');
+                    linkModulo.removeAttribute('download');
+                    linkModulo.style.cursor = 'pointer';
+
+                    linkModulo.addEventListener('click', async function (e) {
+                        e.preventDefault();
+                        // Indicador visual de progreso
+                        const textoOriginal = linkModulo.innerHTML;
+                        linkModulo.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando ZIP...';
+                        linkModulo.style.pointerEvents = 'none';
+
+                        try {
+                            const zip = new JSZip();
+                            const carpeta = zip.folder(nombreBase);
+
+                            await Promise.all(imagenes.filter(Boolean).map(async (nombreImg) => {
+                                try {
+                                    const r = await fetch(resolverRuta(nombreImg));
+                                    if (r.ok) {
+                                        const blob = await r.blob();
+                                        carpeta.file(nombreImg.split('/').pop(), blob);
+                                    }
+                                } catch (_) { /* imagen no disponible, se omite */ }
+                            }));
+
+                            const zipBlob = await zip.generateAsync({ type: 'blob' });
+                            const url = window.URL.createObjectURL(zipBlob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.target = '_blank';
+                            a.download = `${nombreBase}.zip`;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            window.URL.revokeObjectURL(url);
+                        } catch (err) {
+                            alert('Error al generar el ZIP. Verifica tu conexión e inténtalo de nuevo.');
+                        } finally {
+                            linkModulo.innerHTML = textoOriginal;
+                            linkModulo.style.pointerEvents = '';
+                        }
+                    });
+                }
+            }
+
+            // Lógica Botón Anterior
+            btnAnterior.onclick = () => {
+                if (indexActual <= 0) {
+                    window.location.href = 'guias.html';
+                } else {
+                    window.location.href = `?tema=${claves[indexActual - 1]}`;
+                }
+            };
+
+            // Lógica Botón Siguiente
+            btnSiguiente.onclick = () => {
+                if (indexActual < claves.length - 1) {
+                    window.location.href = `?tema=${claves[indexActual + 1]}`;
+                } else {
+                    alert("Has llegado al final de la guía.");
+                }
+            };
+
+            // Ocultar Siguiente si es el último tema
+            if (indexActual === claves.length - 1) {
+                btnSiguiente.style.visibility = 'hidden';
+            }
+
+            // --- DESCARGA GUÍA COMPLETA (PDF según módulo) ---
+            const mapaPDF = {
+                'admin': 'assets/Infomex_Admin.pdf',
+                'ut': 'assets/Infomex_UTGestion.pdf',
+                'ar': 'assets/3-Areas_Responsables.pdf',
+                'ct': 'assets/Infomex_CT.pdf',
+                'rev': 'assets/Infomex_Revisor.pdf',
+                'con': 'assets/INE_Consulta.pdf'
+            };
+            const linkGuiaCompleta = document.getElementById('link-guia-completa');
+            if (data.mod && mapaPDF[data.mod]) {
+                linkGuiaCompleta.href = mapaPDF[data.mod];
+                linkGuiaCompleta.setAttribute('download', mapaPDF[data.mod]);
+            }
+
+        } else {
+            // Manejo de error si el tema no existe
+            title.innerText = "Error";
+            if (bread) bread.innerText = "No encontrado";
+            container.innerHTML = '<p style="padding: 20px;">No se encontró la información.</p>';
+            if (linkModulo) linkModulo.style.display = "none";
+            if (btnAnterior) btnAnterior.style.display = "none";
+            if (btnSiguiente) btnSiguiente.style.display = "none";
+        }
+    </script>
+
+
+
+
+    <script>
+        // Abrir/Cerrar panel
+        const accBtn = document.getElementById("accBtn");
+        const accPanel = document.getElementById("accPanel");
+        accBtn.onclick = () => accPanel.classList.toggle("open");
+        accBtn.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); accPanel.classList.toggle("open"); } };
+
+        // Menú hamburguesa
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const headerNav = document.getElementById('headerNav');
+        if (mobileBtn && headerNav) {
+            mobileBtn.addEventListener('click', function () {
+                headerNav.classList.toggle('active');
+                const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                mobileBtn.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
+
+        // Tamaño de letra
+        const range = document.getElementById("fontRange");
+        const small = document.getElementById("fontSmall");
+        const big = document.getElementById("fontBig");
+
+        function applyFont() {
+            document.documentElement.style.fontSize = range.value + "px";
+        }
+        range.oninput = applyFont;
+        small.onclick = () => { range.value = Math.max(12, parseInt(range.value) - 2); applyFont(); };
+        big.onclick = () => { range.value = Math.min(30, parseInt(range.value) + 2); applyFont(); };
+
+        // Modo nocturno
+        const darkToggle = document.getElementById("darkToggle");
+
+        if (localStorage.getItem("darkmode") === "1") {
+            document.body.classList.add("dark-mode");
+            darkToggle.checked = true;
+        }
+
+        darkToggle.onchange = () => {
+            document.body.classList.toggle("dark-mode");
+
+            localStorage.setItem(
+                "darkmode",
+                document.body.classList.contains("dark-mode") ? "1" : "0"
+            );
+        };
+
+    </script>
+
+    <!-- Botón Volver Arriba -->
+    <button id="backToTopBtn" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        if (backToTopBtn) {
+            window.addEventListener("scroll", () => {
+                backToTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+
+                let footer = document.querySelector('.site-footer');
+                if (footer) {
+                    let footerRect = footer.getBoundingClientRect();
+                    let windowHeight = window.innerHeight;
+                    if (footerRect.top < windowHeight) {
+                        backToTopBtn.style.bottom = (windowHeight - footerRect.top + 30) + 'px';
+                    } else {
+                        backToTopBtn.style.bottom = '30px';
+                    }
+                }
+            });
+            backToTopBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+    </script>
+
+</body>
+
+</html>

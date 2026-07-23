@@ -557,7 +557,8 @@
 
         /* BOTÓN ANTERIOR */
         body.dark-mode .nav-btn,
-        body.dark-mode .nav-btn i {
+        body.dark-mode .nav-btn i,
+        .info-text-container {
             color: white !important;
         }
 
@@ -614,6 +615,7 @@
             color: #000 !important;
         }
 
-       body.dark-mode .info-text-container p {
-           color: #ffffff !important;
-       }
+        /* INFO TEXT CONTAINER MODO NOCTURNO */
+        body.dark-mode .info-text-container p {
+            color: white !important;
+        }

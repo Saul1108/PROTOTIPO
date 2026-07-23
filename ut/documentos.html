@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador - INFOMEX</title>
+
+    <link rel="stylesheet" type="text/css" href="css/documentos.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+
+</head>
+
+<body>
+
+
+    <header class="main-header">
+
+
+        <div class="header-logo">
+            <a href="index.html" class="logo-link">
+                <span class="brand">INFOMEX</span>
+                <span class="separator">|</span>
+                <span class="tagline">Sistema de acceso<br>a la información</span>
+            </a>
+        </div>
+
+
+
+
+        <nav class="header-nav" id="headerNav">
+            <a href="guias.html">Guías de usuario</a>
+            <a href="tutorial.html">Tutorial de<br>versión pública</a>
+            <a href="documentosApoyo.html">Documentos<br>de apoyo</a>
+            <a href="glosario.html">Glosario</a>
+        </nav>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false"
+            aria-controls="headerNav">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+
+
+
+    <main class="main-content">
+
+        <div class="breadcrumb-container">
+            <nav class="breadcrumbs-nav">
+                <a href="index.html">Inicio</a> <span>/</span>
+                <a href="guias.html">Guías de usuario</a> <span>/</span>
+                <b id="bread-actual">Cargando...</b>
+            </nav>
+        </div>
+
+
+        <div class="header-info">
+            <h2 class="doc-title" id="titulo-doc">Guía visual: Cargando...</h2>
+            <div class="download-area">
+                <a id="link-modulo" class="download-link" target="_blank" download>
+                    Descargar guía del módulo <i class="fas fa-file-download"></i>
+                </a>
+                <a id="link-guia-completa" href="Infomex_Admin.pdf" class="download-link" target="_blank" download>
+                    Descargar guía completa <i class="fas fa-book"></i>
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="nav-buttons-container" style="justify-content: space-between;">
+            <button id="btn-anterior" class="nav-btn">
+                <i class="far fa-arrow-alt-circle-left"></i> Anterior
+            </button>
+            <button id="btn-siguiente" class="nav-btn">
+                Siguiente <i class="far fa-arrow-alt-circle-right"></i>
+            </button>
+        </div>
+
+
+
+        <div class="image-container" id="image-viewer-container">
+            <!-- Las imágenes se cargarán dinámicamente aquí -->
+        </div>
+
+
+
+
+        <!-- ========== PANEL DE ACCESIBILIDAD ========== -->
+        <div class="acc-wrapper">
+
+            <!-- Botón lateral -->
+            <div id="accBtn" class="acc-button" role="button" tabindex="0" aria-label="Abrir panel de accesibilidad" aria-expanded="false" aria-controls="accPanel">
+                <i class="fa-solid fa-universal-access"></i>
+            </div>
+
+            <!-- Panel de accesibilidad -->
+            <div id="accPanel" class="acc-panel">
+
+                <div class="acc-header">
+                    <i class="fa-solid fa-universal-access"></i>
+                    <span>Accesibilidad</span>
+                </div>
+
+                <div class="acc-content">
+
+                    <div class="font-size-row">
+                        <button id="fontSmall" class="fs-btn">a -</button>
+                        <input type="range" min="12" max="30" value="16" id="fontRange">
+                        <button id="fontBig" class="fs-btn">A+</button>
+                    </div>
+
+                    <div class="darkmode-row">
+                        <span>Modo nocturno</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkToggle" role="switch" aria-label="Modo nocturno" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- ============================================ -->
+
+
+
+    </main>
+
+
+
+
+
+
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="images/INE.png" alt="Logo" style="height:25px;">
+            <span>© INE México 2026</span>
+        </div>
+    </footer>
+
+
+
+
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const temaId = params.get('tema');
+
+        const biblioteca = {
+    
+            // --- UT-GESTIÓN
+            '1': { n: 'Ingreso al sistema', img: 'images/gestion/4.png', mod: 'ut' },
+            '2': { n: 'Solicitudes manuales', img: ['images/gestion/5.png', 'images/gestion/6.png'], mod: 'ut' },
+            '3': { n: 'Tipo de solicitud', img: 'images/gestion/7.png', mod: 'ut' },
+            '4': { n: 'Registro de solicitud', img: ['images/gestion/8.png', 'images/gestion/9.png', 'images/gestion/10.png'], mod: 'ut' },
+            '5': { n: 'Carga solicitudes de la Plataforma Nacional de Transparencia', img: ['images/gestion/11.png', 'images/gestion/12.png', 'images/gestion/13.png', 'images/gestion/14.png', 'images/gestion/15.png'], mod: 'ut' },
+            '6': { n: 'Estatus de solicitudes', img: 'images/gestion/16.png', mod: 'ut' },
+            '7': { n: 'Solicitudes recibidas', img: ['images/gestion/17.png', 'images/gestion/18.png'], mod: 'ut' },
+            '8': { n: 'Asignar responsable', img: ['images/gestion/19.png', 'images/gestion/20.png', 'images/gestion/21.png'], mod: 'ut' },
+            '9': { n: 'Retirar el turno a las\n áreas responsables', img: ['images/gestion/22.png', 'images/gestion/23.png', 'images/gestion/24.png'], mod: 'ut' },
+            '10': { n: 'Devolución de turno', img: ['images/gestion/25.png', 'images/gestion/26.png'], mod: 'ut' },
+            '11': { n: 'Notoria incompetencia', img: ['images/gestion/27.png', 'images/gestion/28.png', 'images/gestion/29.png'], mod: 'ut' },
+            '12': { n: 'Duplicada', img: ['images/gestion/30.png', 'images/gestion/31.png'], mod: 'ut' },
+            '13': { n: 'Requerimiento de Aclaración (RA)', img: ['images/gestion/32.png', 'images/gestion/33.png', 'images/gestion/34.png'], mod: 'ut' },
+            '14': { n: 'Requerimiento Intermedio de\n Información (RII)', img: 'images/gestion/35.png', mod: 'ut' },
+            '15': { n: 'Solicitar requerimiento a un\n recurso de revisión', img: ['images/gestion/36.png', 'images/gestion/37.png', 'images/gestion/38.png'], mod: 'ut' },
+            '16': { n: 'Requerimiento de Aclaración (RA)', img: ['images/gestion/39.png', 'images/gestion/40.png', 'images/gestion/41.png'], mod: 'ut' },
+            '17': { n: 'Requerimiento Intermedio de\n Información (RII)', img: 'images/gestion/42.png', mod: 'ut' },
+            '18': { n: 'Solicitar Requerimiento al\n solicitante', img: ['images/gestion/43.png', 'images/gestion/44.png', 'images/gestion/45.png'], mod: 'ut' },
+            '19': { n: 'Responder Requerimiento a nombre del responsable', img: ['images/gestion/46.png', 'images/gestion/47.png', 'images/gestion/48.png'], mod: 'ut' },
+            '20': { n: 'Solicitar Vía Procedimental\n al solicitante', img: ['images/gestion/49.png', 'images/gestion/50.png', 'images/gestion/51.png'], mod: 'ut' },
+            '21': { n: 'Responder Vía procedimental a nombre del solicitante', img: ['images/gestion/52.png', 'images/gestion/53.png'], mod: 'ut' },
+            '22': { n: 'Solicitar Prevención al solicitante', img: ['images/gestion/54.png', 'images/gestion/55.png', 'images/gestion/56.png'], mod: 'ut' },
+            '23': { n: 'Responder solicitudes', img: ['images/gestion/57.png', 'images/gestion/58.png', 'images/gestion/59.png', 'images/gestion/60.png', 'images/gestion/61.png'], mod: 'ut' },
+            '24': { n: 'Previo Pago-Asignar responsables', img: ['images/gestion/62.png', 'images/gestion/63.png', 'images/gestion/64.png', 'images/gestion/65.png', 'images/gestion/66.png', 'images/gestion/67.png', 'images/gestion/68.png'], mod: 'ut' },
+            '25': { n: 'Asignación Previo Pago', img: ['images/gestion/69.png', 'images/gestion/70.png'], mod: 'ut' },
+            '26': { n: 'Asignar responsable al recurso\n de revisión', img: ['images/gestion/71.png', 'images/gestion/72.png', 'images/gestion/73.png', 'images/gestion/74.png', 'images/gestion/75.png', 'images/gestion/76.png', 'images/gestion/77.png'], mod: 'ut' },
+            '27': { n: 'Notificar a Autoridad Garante', img: ['images/gestion/78.png', 'images/gestion/79.png', 'images/gestion/80.png'], mod: 'ut' },
+            '28': { n: 'Sentido de resolución', img: ['images/gestion/81.png', 'images/gestion/82.png', 'images/gestion/83.png', 'images/gestion/84.png', 'images/gestion/85.png'], mod: 'ut' },
+            '29': { n: 'Orden de cumplimiento', img: ['images/gestion/86.png', 'images/gestion/87.png', 'images/gestion/88.png', 'images/gestion/89.png'], mod: 'ut' },
+            '30': { n: 'Asignar folio PNT', img: 'images/gestion/90.png', mod: 'ut' },
+            '31': { n: 'Notoria incompetencia', img: ['images/gestion/91.png', 'images/gestion/92.png', 'images/gestion/93.png'], mod: 'ut' },
+            '32': { n: 'Duplicada', img: ['images/gestion/94.png', 'images/gestion/95.png'], mod: 'ut' },
+            '33': { n: 'Responder (concluir)', img: ['images/gestion/96.png', 'images/gestion/97.png', 'images/gestion/98.png'], mod: 'ut' },
+            '34': { n: 'Búsqueda de Expedientes', img: ['images/gestion/99.png', 'images/gestion/100.png'], mod: 'ut' },
+            '35': { n: 'Editar folio de la PNT', img: 'images/gestion/101.png', mod: 'ut' },
+            '36': { n: 'Ingresar número de expediente', img: 'images/gestion/102.png', mod: 'ut' },
+            '37': { n: 'Regenerar Expedientes', img: 'images/gestion/103.png', mod: 'ut' },
+            '38': { n: 'Detalle del expediente virtual', img: ['images/gestion/104.png', 'images/gestion/105.png'], mod: 'ut' },
+            '39': { n: 'Búsqueda General', img: ['images/gestion/106.png', 'images/gestion/107.png'], mod: 'ut' },
+            '40': { n: 'Búsqueda Otros', img: 'images/gestion/108.png', mod: 'ut' },
+            '41': { n: 'Indicadores', img: 'images/gestion/109.png', mod: 'ut' },
+            '42': { n: 'Descarga', img: 'images/gestion/110.png', mod: 'ut' },
+            '43': { n: 'Carga', img: 'images/gestion/111.png', mod: 'ut' },
+            '44': { n: 'Buscador de Solicitudes SAI', img: ['images/gestion/112.png', 'images/gestion/113.png'], mod: 'ut' },
+            '45': { n: 'Buscador de Solicitudes ARCOP', img: ['images/gestion/114.png', 'images/gestion/115.png'], mod: 'ut' },
+            '46': { n: 'Informes fijos', img: ['images/gestion/116.png', 'images/gestion/117.png', 'images/gestion/118.png'], mod: 'ut' },
+            '47': { n: 'Centro de Ayuda', img: 'images/gestion/119.png', mod: 'ut' },
+            '48': { n: 'Notificaciones que recibe el usuario del parte del sistema', img: ['images/gestion/120.png', 'images/gestion/121.png', 'images/gestion/122.png'], mod: 'ut' },
+
+
+            // --- AREAS RESPONSABLES
+            '49': { n: 'Atender una solicitud', img: ['images/area/3.png', 'images/area/4.png'], mod: 'ar' },
+            'tutorial_atender_solicitud': { n: 'Video: Atender una solicitud', vid: 'images/area/atender_solicitud_AR.mp4' , mod: 'ar' },
+            '50': { n: 'Pública', img: ['images/area/5.png', 'images/area/6.png', 'images/area/7.png'], mod: 'ar' },
+            '51': { n: 'Notoria incompetencia', img: 'images/area/8.png', mod: 'ar' },
+            '52': { n: 'Con clasificación', img: 'images/area/9.png', mod: 'ar' },
+            '53': { n: 'Solicitar Requerimiento en SAI', img: ['images/area/10.png', 'images/area/11.png'], mod: 'ar' },
+            '54': { n: 'Vía Procedimental\n solicitudes ARCOP', img: ['images/area/12.png', 'images/area/13.png'], mod: 'ar' },
+            '55': { n: 'Responder Requerimiento de\n Aclaración (RA)', img: ['images/area/14.png', 'images/area/15.png', 'images/area/16.png', 'images/area/17.png', 'images/area/18.png', 'images/area/19.png', 'images/area/20.png'], mod: 'ar' },
+            '56': { n: 'Responder Requerimiento de Información Adicional (RIA)', img: ['images/area/21.png', 'images/area/22.png', 'images/area/23.png', 'images/area/24.png'], mod: 'ar' },
+            '57': { n: 'Sugerencia de turno en ARCOP y SAI', img: ['images/area/25.png', 'images/area/26.png'], mod: 'ar' },
+            '58': { n: 'Responder Asignación Previo Pago', img: ['images/area/27.png', 'images/area/28.png'], mod: 'ar' },
+            '59': { n: 'Respuesta al Recurso de Revisión', img: ['images/area/29.png', 'images/area/30.png'], mod: 'ar' },
+            '60': { n: 'Responder orden de cumplimiento', img: ['images/area/31.png', 'images/area/32.png'], mod: 'ar' },
+            '61': { n: 'Observaciones del Directorio\n de Enlaces', img: ['images/area/33.png', 'images/area/34.png'], mod: 'ar' },
+            '62': { n: 'Capturar', img: ['images/area/35.png', 'images/area/36.png'], mod: 'ar' },
+            '63': { n: 'Capturar Anual', img: ['images/area/37.png', 'images/area/38.png'], mod: 'ar' },
+            '64': { n: 'Editar', img: 'images/area/39.png', mod: 'ar' },
+            '65': { n: 'Consultar', img: 'images/area/40.png', mod: 'ar' },
+            '66': { n: 'Buscador de Solicitudes SAI', img: ['images/area/41.png', 'images/area/42.png'], mod: 'ar' },
+            '67': { n: 'Buscador de Solicitudes ARCOP', img: ['images/area/43.png', 'images/area/44.png'], mod: 'ar' },
+            '68': { n: 'Estatus de las solicitudes', img: 'images/area/45.png', mod: 'ar' },
+            '69': { n: 'Centro de Ayuda', img: 'images/area/46.png', mod: 'ar' },
+            '70': { n: 'Notificaciones que recibe el usuario de parte del sistema', img: 'images/area/47.png', mod: 'ar' },
+
+        };
+
+        const claves = Object.keys(biblioteca);
+        const indexActual = claves.indexOf(temaId);
+
+        const container = document.getElementById('image-viewer-container');
+        const title = document.getElementById('titulo-doc');
+        const linkModulo = document.getElementById('link-modulo');
+        const bread = document.getElementById('bread-actual');
+        const btnAnterior = document.getElementById('btn-anterior');
+        const btnSiguiente = document.getElementById('btn-siguiente');
+
+        if (biblioteca[temaId]) {
+            const data = biblioteca[temaId];
+            title.innerText = data.n;
+            if (bread) bread.innerText = data.n;
+
+            // Actualizar color de fondo según el módulo
+            const mapaColores = {
+                'ut': '#ecf5f6',
+                'ar': '#fbe6f2',
+            };
+            if (data.mod && mapaColores[data.mod]) {
+                document.body.style.backgroundColor = mapaColores[data.mod];
+            }
+
+            // Limpiar contenedor
+            container.innerHTML = '';
+
+            // Función auxiliar para resolver la ruta de la imagen o video
+            const resolverRuta = (nombre) => {
+                if (!nombre) return '';
+                // Si el nombre ya incluye una carpeta (tiene /), lo usamos tal cual
+                return nombre.includes('/') ? nombre : "img/" + nombre;
+            };
+
+            const nombreBase = `Guia_${data.n.replace(/[\s/\\:*?"<>|]/g, '_')}`;
+
+            if (data.vid) {
+                // Cargar video
+                const videoElement = document.createElement('video');
+                videoElement.src = resolverRuta(data.vid);
+                videoElement.controls = true;
+                videoElement.style.width = '100%';
+                videoElement.style.maxWidth = '100%';
+                videoElement.style.height = 'auto';
+                videoElement.style.display = 'block';
+                videoElement.style.border = '1px solid #eee';
+                container.appendChild(videoElement);
+
+                // --- Configurar descarga del video ---
+                const videoUrl = resolverRuta(data.vid);
+                fetch(videoUrl)
+                    .then(r => r.ok ? r.blob() : Promise.reject())
+                    .then(blob => {
+                        const urlBlob = window.URL.createObjectURL(blob);
+                        linkModulo.href = urlBlob;
+                        const ext = data.vid.split('.').pop();
+                        linkModulo.setAttribute('download', `${nombreBase}.${ext}`);
+                    })
+                    .catch(() => {
+                        linkModulo.href = videoUrl;
+                        linkModulo.setAttribute('download', data.vid.split('/').pop());
+                    });
+
+            } else {
+                // Convertir img a array si es un string para manejarlo uniformemente
+                const imagenes = Array.isArray(data.img) ? data.img : [data.img];
+                const primeraImagen = resolverRuta(imagenes[0]);
+
+                // Cargar todas las imágenes
+                imagenes.forEach(nombreImg => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = resolverRuta(nombreImg);
+                    imgElement.alt = data.n;
+                    container.appendChild(imgElement);
+                });
+
+                // --- DESCARGA GUÍA DEL MÓDULO (imagen única o ZIP) ---
+                if (imagenes.length === 1) {
+                    // --- Imagen única: descarga directa ---
+                    fetch(primeraImagen)
+                        .then(r => r.ok ? r.blob() : Promise.reject())
+                        .then(blob => {
+                            const urlBlob = window.URL.createObjectURL(blob);
+                            linkModulo.href = urlBlob;
+                            const ext = imagenes[0].split('.').pop();
+                            linkModulo.setAttribute('download', `${nombreBase}.${ext}`);
+                        })
+                        .catch(() => {
+                            linkModulo.href = primeraImagen;
+                            linkModulo.setAttribute('download', imagenes[0].split('/').pop());
+                        });
+                } else {
+                    // --- Múltiples imágenes: empaquetar como ZIP ---
+                    linkModulo.removeAttribute('href');
+                    linkModulo.removeAttribute('download');
+                    linkModulo.style.cursor = 'pointer';
+
+                    linkModulo.addEventListener('click', async function (e) {
+                        e.preventDefault();
+                        // Indicador visual de progreso
+                        const textoOriginal = linkModulo.innerHTML;
+                        linkModulo.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando ZIP...';
+                        linkModulo.style.pointerEvents = 'none';
+
+                        try {
+                            const zip = new JSZip();
+                            const carpeta = zip.folder(nombreBase);
+
+                            await Promise.all(imagenes.filter(Boolean).map(async (nombreImg) => {
+                                try {
+                                    const r = await fetch(resolverRuta(nombreImg));
+                                    if (r.ok) {
+                                        const blob = await r.blob();
+                                        carpeta.file(nombreImg.split('/').pop(), blob);
+                                    }
+                                } catch (_) { /* imagen no disponible, se omite */ }
+                            }));
+
+                            const zipBlob = await zip.generateAsync({ type: 'blob' });
+                            const url = window.URL.createObjectURL(zipBlob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.target = '_blank';
+                            a.download = `${nombreBase}.zip`;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            window.URL.revokeObjectURL(url);
+                        } catch (err) {
+                            alert('Error al generar el ZIP. Verifica tu conexión e inténtalo de nuevo.');
+                        } finally {
+                            linkModulo.innerHTML = textoOriginal;
+                            linkModulo.style.pointerEvents = '';
+                        }
+                    });
+                }
+            }
+
+            // Lógica Botón Anterior
+            btnAnterior.onclick = () => {
+                if (indexActual <= 0) {
+                    window.location.href = 'guias.html';
+                } else {
+                    window.location.href = `?tema=${claves[indexActual - 1]}`;
+                }
+            };
+
+            // Lógica Botón Siguiente
+            btnSiguiente.onclick = () => {
+                if (indexActual < claves.length - 1) {
+                    window.location.href = `?tema=${claves[indexActual + 1]}`;
+                } else {
+                    alert("Has llegado al final de la guía.");
+                }
+            };
+
+            // Ocultar Siguiente si es el último tema
+            if (indexActual === claves.length - 1) {
+                btnSiguiente.style.visibility = 'hidden';
+            }
+
+            // --- DESCARGA GUÍA COMPLETA (PDF según módulo) ---
+            const mapaPDF = {
+                'admin': 'assets/Infomex_Admin.pdf',
+                'ut': 'assets/Infomex_UTGestion.pdf',
+                'ar': 'assets/3-Areas_Responsables.pdf',
+                'ct': 'assets/Infomex_CT.pdf',
+                'rev': 'assets/Infomex_Revisor.pdf',
+                'con': 'assets/INE_Consulta.pdf'
+            };
+            const linkGuiaCompleta = document.getElementById('link-guia-completa');
+            if (data.mod && mapaPDF[data.mod]) {
+                linkGuiaCompleta.href = mapaPDF[data.mod];
+                linkGuiaCompleta.setAttribute('download', mapaPDF[data.mod]);
+            }
+
+        } else {
+            // Manejo de error si el tema no existe
+            title.innerText = "Error";
+            if (bread) bread.innerText = "No encontrado";
+            container.innerHTML = '<p style="padding: 20px;">No se encontró la información.</p>';
+            if (linkModulo) linkModulo.style.display = "none";
+            if (btnAnterior) btnAnterior.style.display = "none";
+            if (btnSiguiente) btnSiguiente.style.display = "none";
+        }
+    </script>
+
+
+
+
+    <script>
+        // Abrir/Cerrar panel
+        const accBtn = document.getElementById("accBtn");
+        const accPanel = document.getElementById("accPanel");
+        accBtn.onclick = () => accPanel.classList.toggle("open");
+        accBtn.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); accPanel.classList.toggle("open"); } };
+
+        // Menú hamburguesa
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const headerNav = document.getElementById('headerNav');
+        if (mobileBtn && headerNav) {
+            mobileBtn.addEventListener('click', function () {
+                headerNav.classList.toggle('active');
+                const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                mobileBtn.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
+
+        // Tamaño de letra
+        const range = document.getElementById("fontRange");
+        const small = document.getElementById("fontSmall");
+        const big = document.getElementById("fontBig");
+
+        function applyFont() {
+            document.documentElement.style.fontSize = range.value + "px";
+        }
+        range.oninput = applyFont;
+        small.onclick = () => { range.value = Math.max(12, parseInt(range.value) - 2); applyFont(); };
+        big.onclick = () => { range.value = Math.min(30, parseInt(range.value) + 2); applyFont(); };
+
+        // Modo nocturno
+          const darkToggle = document.getElementById("darkToggle");
+
+            if (localStorage.getItem("darkmode") === "1") {
+                document.body.classList.add("dark-mode");
+                darkToggle.checked = true;
+            }
+
+            darkToggle.onchange = () => {
+                document.body.classList.toggle("dark-mode");
+
+                localStorage.setItem(
+                    "darkmode",
+                    document.body.classList.contains("dark-mode") ? "1" : "0"
+                );
+            };
+    </script>
+
+    <!-- Botón Volver Arriba -->
+    <button id="backToTopBtn" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        if (backToTopBtn) {
+            window.addEventListener("scroll", () => {
+                backToTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+
+                let footer = document.querySelector('.site-footer');
+                if (footer) {
+                    let footerRect = footer.getBoundingClientRect();
+                    let windowHeight = window.innerHeight;
+                    if (footerRect.top < windowHeight) {
+                        backToTopBtn.style.bottom = (windowHeight - footerRect.top + 30) + 'px';
+                    } else {
+                        backToTopBtn.style.bottom = '30px';
+                    }
+                }
+            });
+            backToTopBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+    </script>
+
+</body>
+
+</html>
