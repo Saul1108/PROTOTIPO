@@ -537,9 +537,6 @@
             border-color: #777 !important;
         }
 
-        body.dark-mode .acc-button {
-            background: #444 !important;
-        }
 
         body.dark-mode .darkmode-row span {
             color: #000 !important;
