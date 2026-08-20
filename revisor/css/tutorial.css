@@ -6,7 +6,7 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f9f4f6;
+            background-color: #ebebeb;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -146,7 +146,7 @@
 
         .title-divider {
             height: 2px;
-            background-color: #c791a8;
+            background-color: #575453;
             width: 100%;
             margin-bottom: 30px;
         }
@@ -169,7 +169,7 @@
             max-width: 1000px;
             margin-bottom: 25px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #c791a8;
+            border-bottom: 2px solid #575453;
         }
 
         .doc-title {
@@ -373,7 +373,7 @@
         }
 
         .nav-btn:hover {
-            color: #c791a8;
+            color: #575453;
         }
 
 
@@ -391,7 +391,7 @@
 
         /* --- BOTÓN LATERAL --- */
         .acc-button {
-            background: #c791a8;
+            background: #575453;
             color: white;
             width: 55px;
             height: 55px;
@@ -425,7 +425,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #c791a8;
+            background: #575453;
             color: white;
             padding: 12px;
             font-size: 18px;

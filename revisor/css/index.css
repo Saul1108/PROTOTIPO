@@ -212,14 +212,14 @@
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            background: #c791a8;
+            background: #575453;
             color: #fff;
             font-size: 1.1rem;
             font-weight: 700;
             padding: 1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
-            box-shadow: 0 6px 20px #c791a8;
+            box-shadow: 0 6px 20px #575453;
             transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -241,14 +241,14 @@
         }
 
         .cta-btn:hover {
-            background: #c791a8;
+            background: #575453;
             transform: translateY(-3px);
-            box-shadow: 0 10px 28px #c791a8;
+            box-shadow: 0 10px 28px #575453;
         }
 
         .cta-btn:active {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px #c791a8;
+            box-shadow: 0 4px 12px #575453;
         }
 
         .cta-btn:focus-visible {
@@ -292,7 +292,7 @@
         }
 
         .acc-button {
-            background: #c791a8;
+            background: #575453;
             color: white;
             width: 55px;
             height: 55px;
@@ -306,7 +306,7 @@
         }
 
         .acc-button:hover {
-            background: #c791a8;
+            background: #575453;
         }
 
         .acc-panel {
@@ -328,7 +328,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #c791a8;
+            background: #575453;
             color: white;
             padding: 12px;
             font-size: 18px;
@@ -498,18 +498,18 @@
 
         /* Botón CTA en modo oscuro */
         body.dark-mode .cta-btn {
-            background: #c791a8;
-            box-shadow: 0 6px 20px #c791a8;
+            background: #575453;
+            box-shadow: 0 6px 20px #575453;
         }
 
         body.dark-mode .cta-btn:hover {
-            background: #c791a8;
+            background: #575453;
         }
 
         /* Nav links */
         body.dark-mode .nav-link:hover {
             background: rgba(255, 255, 255, 0.08) !important;
-            color: #c791a8 !important;
+            color: #575453 !important;
         }
 
         /* Hamburger */

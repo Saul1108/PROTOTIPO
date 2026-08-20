@@ -6,7 +6,7 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f9f4f6;
+            background-color: #ebebeb;
             /* Color lila de fondo */
             display: flex;
             flex-direction: column;
@@ -147,7 +147,7 @@
 
         .title-divider {
             height: 2px;
-            background-color: #c791a8;
+            background-color: #575453;
             width: 100%;
             margin-bottom: 30px;
         }
@@ -167,7 +167,7 @@
 
         .letter-link {
             text-decoration: none;
-            color: #c791a8;
+            color: #575453;
             width: 30px;
             height: 30px;
             display: flex;
@@ -179,7 +179,7 @@
         }
 
         .letter-link:hover {
-            background-color: #c791a8;
+            background-color: #575453;
             color: white;
         }
 
@@ -193,7 +193,7 @@
         }
 
         .term-title {
-            color: #c791a8;
+            color: #575453;
             font-size: 1.4em;
             font-weight: 700;
             margin-bottom: 8px;
@@ -341,7 +341,7 @@
         }
 
         .nav-btn:hover {
-            color: #c791a8;
+            color: #575453;
         }
 
 
@@ -357,7 +357,7 @@
 
         /* --- BOTÓN LATERAL --- */
         .acc-button {
-            background: #c791a8;
+            background: #575453;
             color: white;
             width: 55px;
             height: 55px;
@@ -393,7 +393,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #c791a8;
+            background: #575453;
             color: white;
             padding: 12px;
             font-size: 18px;
@@ -507,7 +507,7 @@
         body.dark-mode h1,
         body.dark-mode h2,
         body.dark-mode h3 {
-            color: #c791a8 !important;
+            color: #ebebeb !important;
         }
 
         /* Texto definiciones */
@@ -590,7 +590,7 @@
             bottom: 30px;
             right: 30px;
             z-index: 9999;
-            background: #c791a8;
+            background: #575453;
             color: white;
             border: none;
             border-radius: 50%;
@@ -610,7 +610,7 @@
         }
 
         body.dark-mode .back-to-top {
-            background: #c791a8;
+            background: #575453;
             color: white;
         }
 

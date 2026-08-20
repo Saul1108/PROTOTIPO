@@ -7,7 +7,7 @@
         /* Elige un solo color de fondo. Si quieres igual al primer HTML, usa #efebf4 */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f9f4f6;
+            background-color: #ebebeb;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -16,7 +16,7 @@
         /* --- HEADER --- */
         .main-header {
             background-color: #ffffff;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid #c0c0c0;
             padding: 15px 60px;
             display: flex;
             justify-content: space-between;
@@ -152,7 +152,7 @@
         }
 
         .nav-btn:hover {
-            color: #c791a8;
+            color: #575453;
         }
 
         /* --- OPCIONES DE NAVEGACIÓN (TABS) --- */
@@ -252,14 +252,14 @@
             width: 100%;
             border-radius: 8px;
             overflow: hidden;
-            background: #c791a8;
+            background: #575453;
             /* Default */
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
             transition: transform 0.2s, background-color 0.3s;
         }
 
         .has-dropdown {
-            border-bottom: 6px solid #c791a8;
+            border-bottom: 6px solid #575453;
             /* Default */
         }
 
@@ -284,7 +284,7 @@
 
         /* --- SUBMENÚ DESPLEGABLE --- */
         .dropdown-content {
-            background-color: #eedde4;
+            background-color: #c0c0c0;
             /* Default */
             max-height: 0;
             overflow: hidden;
@@ -330,7 +330,7 @@
         }
 
         .theme-green .has-dropdown {
-            border-bottom-color: #c791a8;
+            border-bottom-color: #575453;
         }
 
         .theme-green .menu-item:hover {
@@ -349,11 +349,11 @@
     
 
         #module-wrapper.theme-tab3 {
-            background-color: #f9f4f6;
+            background-color: #ebebeb;
         }
 
         #module-wrapper.theme-tab4 {
-            background-color: #f9f4f6;
+            background-color: #ebebeb;
         }
 
        
@@ -507,7 +507,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: #c791a8;
+            background-color: #575453;
             color: white;
             border: none;
             border-radius: 50%;
@@ -549,7 +549,7 @@
 
         /* --- BOTÓN LATERAL --- */
         .acc-button {
-            background: #c791a8;
+            background: #575453;
             color: white;
             width: 55px;
             height: 55px;
@@ -585,7 +585,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #eedde4;
+            background: #c0c0c0;
             color: white;
             padding: 12px;
             font-size: 18px;
@@ -739,44 +739,6 @@
    Fondo oscuro con color de tema en modo nocturno
 ============================================================ */
 
-        /* Tema 1: Original */
-        body.dark-mode .theme-original .menu-item .main-button {
-            background: #b3a0c9 !important;
-            color: black !important;
-            border-color: transparent !important;
-        }
-
-        body.dark-mode .theme-original .menu-item .main-button:hover,
-        body.dark-mode .theme-original .menu-item.is-open .main-button {
-            background: #732d91 !important;
-            color: white !important;
-        }
-z
-        /* Tema 3: Verde */
-        body.dark-mode .theme-green .menu-item .main-button {
-            background: #a0cdd0 !important;
-            color: black !important;
-            border-color: transparent !important;
-        }
-
-        body.dark-mode .theme-green .menu-item .main-button:hover,
-        body.dark-mode .theme-green .menu-item.is-open .main-button {
-            background: #c791a8 !important;
-            color: white !important;
-        }
-
-        /* Tema 4: Rojo */
-        body.dark-mode .theme-red .menu-item .main-button {
-            background: #eedde4!important;
-            color: black !important;
-            border-color: transparent !important;
-        }
-
-        body.dark-mode .theme-red .menu-item .main-button:hover,
-        body.dark-mode .theme-red .menu-item.is-open .main-button {
-            background: #c791a8 !important;
-            color: white !important;
-        }
 
         /* Tema 5: Naranja */
         body.dark-mode .theme-orange .menu-item .main-button {
@@ -787,7 +749,7 @@ z
 
         body.dark-mode .theme-orange .menu-item .main-button:hover,
         body.dark-mode .theme-orange .menu-item.is-open .main-button {
-            background: #c791a8 !important;
+            background: #575453 !important;
             color: white !important;
         }
 

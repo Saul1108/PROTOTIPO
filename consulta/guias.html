@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema INFOMEX - Panel Completo</title>
+
+    <link rel="stylesheet" type="text/css" href="css/guiaUsuario.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="header-logo">
+            <a href="index.html" class="logo-link">
+                <span class="brand">INFOMEX</span>
+                <span class="separator">|</span>
+                <span class="tagline">Sistema de acceso<br>a la información</span>
+            </a>
+        </div>
+
+        <nav class="header-nav" id="headerNav" aria-label="Navegación principal">
+            <a href="guias.html">Guías de usuario</a>
+            <a href="tutorial.html">Tutorial de<br>versión pública</a>
+            <a href="documentosApoyo.html">Documentos<br>de apoyo</a>
+            <a href="glosario.html">Glosario</a>
+        </nav>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false"
+            aria-controls="headerNav">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <div id="module-wrapper" style="transition: background-color 0.4s ease; flex: 1;">
+        <div class="breadcrumb-container" style="margin-top: 0; padding-top: 40px;">
+            <nav class="breadcrumbs-nav">
+                <a href="index.html">Inicio</a>
+                <span>/</span>
+                <b>Guías de usuario</b>
+            </nav>
+        </div>
+
+        <div class="nav-buttons-container">
+            <a href="index.html" class="nav-btn">
+                <i class="far fa-arrow-alt-circle-left"></i> Anterior
+            </a>
+        </div>
+
+        <div class="info-text-container" style="max-width: 1100px; margin: 0 auto; padding: 20px 60px; text-align: left;">
+            <p style="font-size: 1.1rem; color: #444; line-height: 1.5;">
+                Aquí encontrarás instrucciones paso a paso para realizar procesos dentro del sistema de forma sencilla y eficiente.
+            </p>
+        </div>
+
+        <div class="options-nav" role="tablist" aria-label="Menú de Opciones">
+            <button class="option-btn" onclick="showTab('tab3', this)" style="border-bottom: 3px solid #0063b8;"
+                role="tab" aria-selected="false" aria-controls="tab3">INE Revisor</button>
+            <button class="option-btn" onclick="showTab('tab4', this)" style="border-bottom: 3px solid #0063b8;"
+                role="tab" aria-selected="false" aria-controls="tab4">Buscador de Datos Personales e Información Reservada</button>
+        </div>
+
+        <div id="tabs-wrapper">
+
+            <script>
+                function showTab(tabId, btn) {
+                    // Cerrar todos los dropdowns al cambiar de pestaña
+                    document.querySelectorAll('.dropdown-content.open').forEach(function (d) {
+                        d.classList.remove('open');
+                    });
+                    document.querySelectorAll('.menu-item.is-open').forEach(function (m) {
+                        m.classList.remove('is-open');
+                    });
+
+                    // Ocultar todos los tabs
+                    var contents = document.getElementsByClassName('tab-content');
+                    for (var i = 0; i < contents.length; i++) {
+                        contents[i].style.display = 'none';
+                        contents[i].classList.remove('active');
+                    }
+
+                    // Mostrar target
+                    var targetTab = document.getElementById(tabId);
+                    if(targetTab) {
+                        targetTab.style.display = 'block';
+                        targetTab.classList.add('active');
+                    }
+
+                    // Actualizar el fondo del wrapper
+                    var wrapper = document.getElementById('module-wrapper');
+                    wrapper.className = ''; 
+                    wrapper.classList.add('theme-' + tabId);
+
+                    // Actualizar botones y atributos ARIA
+                    var buttons = document.getElementsByClassName('option-btn');
+                    for (var i = 0; i < buttons.length; i++) {
+                        buttons[i].classList.remove('active');
+                        buttons[i].setAttribute('aria-selected', 'false');
+                        buttons[i].style.backgroundColor = '#ffffff';
+                        buttons[i].style.color = '#000000';
+                    }
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-selected', 'true');
+
+                    btn.style.backgroundColor = btn.style.borderBottomColor;
+                    btn.style.color = 'white';
+                }
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Inicializar con la primera pestaña existente (tab3)
+                    var firstBtn = document.querySelector('.options-nav .option-btn');
+                    if (firstBtn) {
+                        showTab('tab3', firstBtn);
+                    }
+
+                    // Dropdowns de los botones
+                    document.querySelectorAll('.has-dropdown .main-button').forEach(function (btn) {
+                        btn.style.cursor = 'pointer';
+                        btn.setAttribute('tabindex', '0');
+                        btn.setAttribute('role', 'button');
+
+                        function toggleDropdown(e) {
+                            e.stopPropagation();
+                            var parent = btn.closest('.menu-item');
+                            var dropdown = parent.querySelector('.dropdown-content');
+                            var isOpen = dropdown.classList.contains('open');
+
+                            // Cerrar otros dropdowns abiertos
+                            document.querySelectorAll('.dropdown-content.open').forEach(function (d) {
+                                if(d !== dropdown) d.classList.remove('open');
+                            });
+                            document.querySelectorAll('.menu-item.is-open').forEach(function (m) {
+                                if(m !== parent) m.classList.remove('is-open');
+                            });
+
+                            // Alternar actual
+                            dropdown.classList.toggle('open');
+                            parent.classList.toggle('is-open');
+                        }
+
+                        btn.addEventListener('click', toggleDropdown);
+
+                        btn.addEventListener('keydown', function (e) {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                toggleDropdown(e);
+                            }
+                            if (e.key === 'Escape') {
+                                var parent = btn.closest('.menu-item');
+                                var dropdown = parent.querySelector('.dropdown-content');
+                                if (dropdown.classList.contains('open')) {
+                                    dropdown.classList.remove('open');
+                                    parent.classList.remove('is-open');
+                                    btn.focus();
+                                }
+                            }
+                        });
+                    });
+
+                    // Cerrar al hacer click fuera
+                    document.addEventListener('click', function () {
+                        document.querySelectorAll('.dropdown-content.open').forEach(function (d) {
+                            d.classList.remove('open');
+                        });
+                        document.querySelectorAll('.menu-item.is-open').forEach(function (m) {
+                            m.classList.remove('is-open');
+                        });
+                    });
+
+                    // Menú hamburguesa responsive
+                    var mobileBtn = document.getElementById('mobileMenuBtn');
+                    var headerNav = document.getElementById('headerNav');
+                    if (mobileBtn && headerNav) {
+                        mobileBtn.addEventListener('click', function () {
+                            headerNav.classList.toggle('active');
+                            var isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                            mobileBtn.setAttribute('aria-expanded', !isExpanded);
+                        });
+                    }
+                });
+            </script>
+
+
+            <!-- PESTAÑA INE CONSULTA-->
+            <div id="tab3" class="tab-content theme-violet">
+                <div class="container">
+                    <h2 style="margin-bottom: 20px; color: #000000;">INE-Consulta</h2>
+                    <div class="content-grid">
+                        <!-- Columna 1 -->
+                        <div class="column">
+                            <div class="menu-item"><a href="documentos.html?tema=111" class="main-button">Ingreso al
+                                    sistema</a></div>
+                        </div>
+
+                        <!-- Columna 2 -->
+                        <div class="column">
+                            <div class="menu-item has-dropdown">
+                                <div class="main-button">Motor de folios asignados por áreas</div>
+                                <div class="dropdown-content">
+                                    <a href="documentos.html?tema=112">Buscador de Solicitudes SAI</a>
+                                    <a href="documentos.html?tema=113">Buscador de Solicitudes ARCOP</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna 3 -->
+                        <div class="column">
+                            <div class="menu-item"><a href="documentos.html?tema=114"
+                                    class="main-button">Solicitudes</a></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div id="tab4" class="tab-content theme-red">
+                <div class="container">
+                    <h2 style="margin-bottom: 20px; color: #000000;">Buscador de Datos Personales e Información Reservada</h2>
+                    <div class="content-grid" style="display: block;"> 
+                        <div class="pdf-container">
+                            <iframe src="assets/4-Buscador_de_Datos_Personales_e_Informacion_Reservada.pdf"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> </div> <div class="acc-wrapper">
+        <div id="accBtn" class="acc-button" role="button" tabindex="0" aria-label="Abrir panel" aria-expanded="false" aria-controls="accPanel">
+            <i class="fa-solid fa-universal-access"></i>
+        </div>
+        <div id="accPanel" class="acc-panel">
+            <div class="acc-header">
+                <i class="fa-solid fa-universal-access"></i>
+                <span>Accesibilidad</span>
+            </div>
+            <div class="acc-content">
+                <div class="font-size-row">
+                    <button id="fontSmall" class="fs-btn">a -</button>
+                    <input type="range" min="12" max="30" value="16" id="fontRange">
+                    <button id="fontBig" class="fs-btn">A+</button>
+                </div>
+                <div class="darkmode-row">
+                    <span>Modo nocturno</span>
+                    <label class="switch">
+                        <input type="checkbox" id="darkToggle" role="switch" aria-label="Modo nocturno" onkeydown="if(event.key==='Enter'){event.preventDefault();this.click();}">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="images/INE.png" alt="INE Logo" class="footer-logo">
+            <span class="footer-text">© INE México 2026</span>
+        </div>
+    </footer>
+
+    <button id="backToTopBtn" class="back-to-top" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const accBtn = document.getElementById("accBtn");
+        const accPanel = document.getElementById("accPanel");
+
+        accBtn.onclick = () => accPanel.classList.toggle("open");
+        accBtn.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); accPanel.classList.toggle("open"); } };
+
+        const range = document.getElementById("fontRange");
+        const small = document.getElementById("fontSmall");
+        const big = document.getElementById("fontBig");
+
+        function applyFont() {
+            document.documentElement.style.fontSize = range.value + "px";
+        }
+
+        range.oninput = applyFont;
+        small.onclick = () => { range.value = Math.max(12, parseInt(range.value) - 2); applyFont(); };
+        big.onclick = () => { range.value = Math.min(30, parseInt(range.value) + 2); applyFont(); };
+
+ 
+
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        if (backToTopBtn) {
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.style.display = "flex";
+                } else {
+                    backToTopBtn.style.display = "none";
+                }
+            });
+            backToTopBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        }
+
+        const darkToggle = document.getElementById("darkToggle");
+
+        if (localStorage.getItem("darkmode") === "1") {
+            document.body.classList.add("dark-mode");
+            darkToggle.checked = true;
+        }
+
+        darkToggle.onchange = () => {
+            document.body.classList.toggle("dark-mode");
+
+            localStorage.setItem(
+                "darkmode",
+                document.body.classList.contains("dark-mode") ? "1" : "0"
+            );
+        };
+
+
+
+    </script>
+</body>
+</html>

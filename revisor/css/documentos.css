@@ -7,7 +7,7 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f9f4f6;
+            background-color: #ebebeb;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -164,7 +164,7 @@
             align-items: center;
             margin-bottom: 16px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #c791a8;
+            border-bottom: 2px solid #575453;
         }
 
         .doc-title {
@@ -193,7 +193,7 @@
         }
 
         .download-link:hover {
-            color: #c791a8;
+            color: #575453;
         }
 
         /* 6. Imagen */
@@ -304,7 +304,7 @@
         }
 
         .nav-btn:hover {
-            color: #c791a8;
+            color: #575453;
         }
 
 
@@ -327,7 +327,7 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #efebf4;
+            background-color: #ebebeb;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -449,7 +449,7 @@
             justify-content: space-between;
             padding-bottom: 10px;
             margin-bottom: 16px;
-            border-bottom: 2px solid #c791a8;
+            border-bottom: 2px solid #575453;
         }
 
         .doc-title {
@@ -478,7 +478,7 @@
         }
 
         .download-link:hover {
-            color: #c791a8;
+            color: #575453;
         }
 
         /* ============================================================
@@ -525,7 +525,7 @@
         }
 
         .nav-btn:hover {
-            color: #c791a8;
+            color: #575453;
         }
 
         .nav-btn i {
@@ -559,7 +559,7 @@
         }
 
         .acc-button {
-            background: #c791a8;
+            background: #575453;
             color: white;
             width: 55px;
             height: 55px;
@@ -587,7 +587,7 @@
         }
 
         .acc-header {
-            background: #c791a8;
+            background: #575453;
             padding: 12px;
             color: white;
             display: flex;
@@ -783,7 +783,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: #c791a8;
+            background-color: #575453;
             color: white;
             border: none;
             border-radius: 50%;
